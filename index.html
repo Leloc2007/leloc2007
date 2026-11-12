@@ -9,119 +9,195 @@
 <meta property="og:description" content="Bận rộn vẫn ăn uống lành mạnh được. Nhắn Lộc để bắt đầu.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://leloc2007.github.io/leloc2007/loc.jpg">
+<meta name="color-scheme" content="light dark">
+<script>
+  // Nền sáng hay tối theo GIỜ ĐỊA PHƯƠNG của người đọc (múi giờ trên máy họ):
+  // 6:00 đến 17:59 là nền sáng, còn lại là nền tối. Bấm nút trên thanh đầu trang để tự đổi.
+  (function () {
+    var chosen = null;
+    try { chosen = sessionStorage.getItem("theme"); } catch (e) {}
+    var h = new Date().getHours();
+    document.documentElement.setAttribute("data-theme", chosen || (h >= 6 && h < 18 ? "light" : "dark"));
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,700;1,200&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
 <style>
   :root{
     --garden:#266431; --rosemary:#3A5137; --bay:#224945; --night:#101820;
-    --mango:#EFAC29; --sunflower:#FFF176; --rain:#DDFCFF; --white:#FFFFFF;
-    --soft:#F4F8F4; --line:#DCE7DD;
+    --mango:#EFAC29; --sunflower:#FFF176;
+    /* nền sáng */
+    --bg:#FFFFFF; --soft:#F4F8F4; --card:#FFFFFF; --line:#DCE7DD;
+    --text:#101820; --muted:#3b4a3d; --accent:#266431; --head:#224945;
+    --hero-a:#266431; --hero-b:#1f5529; --bar:rgba(255,255,255,.92);
+    --shadow:0 14px 40px rgba(16,24,32,.10);
+  }
+  html[data-theme="dark"]{
+    --bg:#101820; --soft:#152129; --card:#1A2831; --line:#2A3B43;
+    --text:#EAF2EC; --muted:#A9BBAE; --accent:#7FD08C; --head:#EAF2EC;
+    --hero-a:#16352A; --hero-b:#101820; --bar:rgba(16,24,32,.88);
+    --shadow:0 14px 40px rgba(0,0,0,.45);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:"Noto Sans",system-ui,sans-serif;color:var(--night);background:var(--white);line-height:1.65;font-size:17px}
+  body{font-family:"Be Vietnam Pro",system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.65;font-size:17px;transition:background .3s,color .3s}
   a{color:inherit}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
 
   /* Thanh trên */
-  header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{font-weight:700;color:var(--garden);text-decoration:none;font-size:19px}
-  .brand small{display:block;font-weight:400;font-size:12px;color:var(--rosemary);letter-spacing:.3px}
-  nav a{margin-left:22px;text-decoration:none;font-weight:500;font-size:15px;color:var(--rosemary)}
-  nav a:hover{color:var(--garden)}
-  @media(max-width:720px){nav a:not(.btn){display:none}}
+  header{position:sticky;top:0;z-index:20;background:var(--bar);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:66px;gap:12px}
+  .brand{font-weight:800;color:var(--accent);text-decoration:none;font-size:19px;line-height:1.2}
+  .brand small{display:block;font-weight:400;font-size:12px;color:var(--muted);letter-spacing:.3px}
+  nav{display:flex;align-items:center;gap:22px}
+  nav a{text-decoration:none;font-weight:500;font-size:15px;color:var(--muted)}
+  nav a:hover{color:var(--accent)}
+  @media(max-width:820px){nav a:not(.btn){display:none}nav{gap:10px}}
+  .theme{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:18px;cursor:pointer;display:grid;place-items:center}
+  .theme:hover{border-color:var(--accent)}
 
   .btn{display:inline-block;background:var(--garden);color:#fff!important;padding:13px 26px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px;transition:transform .15s, box-shadow .15s;border:2px solid var(--garden)}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(38,100,49,.25)}
-  .btn.ghost{background:transparent;color:var(--garden)!important}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(38,100,49,.3)}
+  .btn.ghost{background:transparent;color:var(--accent)!important;border-color:var(--accent)}
   .btn.mango{background:var(--mango);border-color:var(--mango);color:var(--night)!important}
   .btn.small{padding:9px 18px;font-size:14px}
 
   /* Hero */
-  .hero{position:relative;overflow:hidden;background:var(--garden);color:#fff;padding:84px 0 110px}
-  .hero::before,.hero::after{content:"";position:absolute;background:rgba(255,255,255,.07);border-radius:62% 38% 55% 45% / 48% 60% 40% 52%}
-  .hero::before{width:520px;height:520px;right:-140px;top:-120px}
-  .hero::after{width:300px;height:300px;right:160px;bottom:-170px;background:rgba(239,172,41,.16)}
-  .hero .wrap{position:relative;z-index:1}
-  .tag{display:inline-block;background:rgba(255,255,255,.14);padding:6px 16px;border-radius:999px;font-size:14px;font-weight:500;margin-bottom:22px}
-  h1{font-size:clamp(36px,6.4vw,66px);line-height:1.1;font-weight:700;max-width:13.5em;letter-spacing:-.5px}
-  h1 em{font-style:normal;color:var(--sunflower)}
-  .hero p.lead{font-size:clamp(17px,2.2vw,21px);max-width:34em;margin:24px 0 34px;opacity:.95}
+  .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--hero-a),var(--hero-b));color:#fff;padding:72px 0 84px}
+  .hero::before,.hero::after{content:"";position:absolute;border-radius:62% 38% 55% 45% / 48% 60% 40% 52%}
+  .hero::before{width:560px;height:560px;right:-180px;top:-160px;background:rgba(255,255,255,.06)}
+  .hero::after{width:320px;height:320px;left:-120px;bottom:-190px;background:rgba(239,172,41,.14)}
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero{padding:52px 0 64px}}
+  .tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:7px 16px;border-radius:999px;font-size:14px;font-weight:500;margin-bottom:24px}
+  .tag i{width:8px;height:8px;border-radius:50%;background:var(--sunflower);display:inline-block}
+  h1{font-size:clamp(36px,5.6vw,62px);line-height:1.1;font-weight:800;letter-spacing:-1px}
+  h1 em{font-style:normal;color:var(--sunflower);display:block}
+  .hero p.lead{font-size:clamp(17px,2vw,20px);max-width:33em;margin:24px 0 32px;opacity:.93}
   .cta-row{display:flex;flex-wrap:wrap;gap:14px}
-  .hero .btn.ghost{border-color:#fff;color:#fff!important}
+  .hero .btn.ghost{border-color:rgba(255,255,255,.7);color:#fff!important}
+  .checks{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:28px;font-size:14.5px;opacity:.92;list-style:none}
+  .checks li::before{content:"✓";color:var(--sunflower);font-weight:800;margin-right:8px}
 
-  section{padding:80px 0}
-  .eyebrow{color:var(--garden);font-weight:700;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
-  h2{font-size:clamp(28px,4vw,42px);line-height:1.2;max-width:17em;margin-bottom:18px;letter-spacing:-.3px}
-  .sub{max-width:38em;color:#3b4a3d;margin-bottom:40px}
+  .portrait{position:relative;max-width:360px;margin:0 auto;width:100%}
+  .photo{aspect-ratio:4/5;border-radius:46% 54% 42% 58% / 52% 44% 56% 48%;overflow:hidden;background:var(--bay);box-shadow:0 30px 60px rgba(0,0,0,.35)}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .chip{position:absolute;background:#fff;color:var(--night);border-radius:16px;padding:10px 14px;font-size:13.5px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.25);display:flex;align-items:center;gap:9px;animation:float 5s ease-in-out infinite}
+  .chip small{display:block;font-weight:400;color:#4a5a4c;font-size:12px}
+  .chip i{width:10px;height:10px;border-radius:50%;background:var(--garden);flex:0 0 10px}
+  .chip.c1{left:-18px;top:12%}
+  .chip.c2{right:-14px;top:48%;animation-delay:1.2s}
+  .chip.c2 i{background:var(--mango)}
+  .chip.c3{left:4%;bottom:6%;animation-delay:2.4s}
+  @media(max-width:900px){.chip.c1{left:0}.chip.c2{right:0}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-  /* Nỗi đau */
-  .pains{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-  .pain{background:var(--soft);border-radius:22px;padding:26px;border:1px solid var(--line)}
-  .pain b{display:block;font-size:19px;margin-bottom:6px;color:var(--bay)}
-  .pain span{font-size:28px;display:block;margin-bottom:10px}
+  /* Dải chạy */
+  .strip{border-bottom:1px solid var(--line);background:var(--soft);padding:18px 0;overflow:hidden}
+  .strip p{text-align:center;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:12px}
+  .marquee{display:flex;width:max-content;animation:run 34s linear infinite}
+  .marquee span{white-space:nowrap;margin:0 8px;padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-weight:600;font-size:14.5px;color:var(--head)}
+  @keyframes run{to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.marquee,.chip{animation:none}}
+
+  section{padding:84px 0}
+  .eyebrow{color:var(--accent);font-weight:700;font-size:13.5px;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:12px}
+  h2{font-size:clamp(28px,4vw,44px);line-height:1.18;max-width:17em;margin-bottom:18px;letter-spacing:-.6px;font-weight:800;color:var(--head)}
+  h2 em{font-style:normal;color:var(--accent)}
+  .sub{max-width:38em;color:var(--muted);margin-bottom:40px}
+  .softbg{background:var(--soft)}
+
+  /* Thẻ đánh số */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .ncard{background:var(--card);border-radius:22px;padding:28px;border:1px solid var(--line);color:var(--muted);transition:transform .2s, box-shadow .2s}
+  .ncard:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .ncard .no{font-size:14px;font-weight:800;color:var(--accent);letter-spacing:1px;margin-bottom:14px;display:block}
+  .ncard b{display:block;font-size:19px;margin-bottom:6px;color:var(--head)}
+
+  /* Trước đây và khi có người đi cùng */
+  .compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:28px}
+  .col{border-radius:24px;padding:28px;border:1px solid var(--line);background:var(--card)}
+  .col.after{background:var(--garden);border-color:var(--garden);color:#fff}
+  .col h3{font-size:14px;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:14px;color:var(--muted)}
+  .col.after h3{color:var(--sunflower)}
+  .col ul{list-style:none}
+  .col li{padding:9px 0 9px 30px;position:relative;border-top:1px dashed var(--line)}
+  .col.after li{border-top-color:rgba(255,255,255,.22)}
+  .col li:first-child{border-top:0}
+  .col li::before{content:"×";position:absolute;left:4px;color:var(--muted);font-weight:700}
+  .col.after li::before{content:"✓";color:var(--sunflower)}
 
   /* Hành trình */
-  .journey{background:var(--soft)}
-  .steps{position:relative;max-width:760px}
-  .steps::before{content:"";position:absolute;left:27px;top:10px;bottom:60px;border-left:3px dashed var(--garden);opacity:.45}
-  .step{position:relative;display:flex;gap:22px;margin-bottom:30px}
-  .num{flex:0 0 56px;height:56px;border-radius:50%;background:var(--garden);color:#fff;font-weight:700;font-size:22px;display:grid;place-items:center;position:relative;z-index:1;box-shadow:0 0 0 6px var(--soft)}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;position:relative}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px}
+  .num{width:46px;height:46px;border-radius:50%;background:var(--garden);color:#fff;font-weight:800;font-size:19px;display:grid;place-items:center;margin-bottom:16px}
   .step:last-child .num{background:var(--mango);color:var(--night)}
-  .step h3{font-size:21px;margin-bottom:4px;color:var(--bay)}
-  .step p{color:#3b4a3d}
+  .step h3{font-size:20px;margin-bottom:6px;color:var(--head)}
+  .step p{color:var(--muted);font-size:16px}
 
   /* Hai lời mời */
   .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
   .card{border-radius:28px;padding:36px 32px;display:flex;flex-direction:column}
   .card.health{background:var(--garden);color:#fff}
-  .card.biz{background:#fff;border:2px solid var(--garden)}
+  .card.biz{background:var(--card);border:2px solid var(--accent)}
   .card .label{font-size:13px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;opacity:.85;margin-bottom:10px}
-  .card h3{font-size:28px;line-height:1.2;margin-bottom:14px}
+  .card.biz .label{color:var(--accent)}
+  .card h3{font-size:27px;line-height:1.2;margin-bottom:14px;font-weight:800}
+  .card.biz h3{color:var(--head)}
   .card ul{list-style:none;margin:6px 0 28px}
   .card li{padding-left:28px;position:relative;margin-bottom:10px}
   .card li::before{content:"";position:absolute;left:4px;top:10px;width:10px;height:10px;border-radius:50% 0 50% 50%;background:var(--mango);transform:rotate(45deg)}
   .card .btn{margin-top:auto;align-self:flex-start}
   .card.health .btn{background:#fff;border-color:#fff;color:var(--garden)!important}
-  .note{font-size:14px;margin-top:16px;opacity:.85}
+  .note{font-size:14px;margin-top:16px;color:var(--muted)}
 
-  /* Về Lộc */
-  .about{display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:44px;align-items:center}
-  @media(max-width:760px){.about{grid-template-columns:1fr}}
-  .photo{aspect-ratio:4/5;border-radius:46% 54% 42% 58% / 52% 44% 56% 48%;background:linear-gradient(150deg,var(--garden),var(--bay));display:grid;place-items:center;color:#fff;font-size:90px;font-weight:700;overflow:hidden}
-  .photo img{width:100%;height:100%;object-fit:cover}
-  .about p{margin-bottom:14px;color:#2f3d31}
-
-  .story{margin-top:44px}
-  .turn{background:#fff;border-radius:26px;padding:32px;border:1px solid var(--line);max-width:820px}
-  .turn h3,.story h3{font-size:24px;color:var(--bay);margin-bottom:12px}
-  .turn p{margin-bottom:12px;color:#2f3d31}
-  .turn .disc{font-style:italic;font-weight:200;font-size:15px;margin-bottom:0}
-  .story .mt{margin-top:44px;margin-bottom:18px}
-  .pain.white{background:#fff}
+  /* Câu chuyện */
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+  @media(max-width:860px){.story-grid{grid-template-columns:1fr}}
+  .story-grid p{margin-bottom:14px;color:var(--muted)}
+  .story-grid p b{color:var(--text)}
+  .turn{background:var(--card);border-radius:26px;padding:32px;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .turn h3,.mt{font-size:23px;color:var(--head);margin-bottom:12px;font-weight:800}
+  .turn .disc{font-style:italic;font-weight:300;font-size:15px;margin-bottom:0}
+  .mt{margin-top:48px;margin-bottom:18px}
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin:32px 0}
   .stats div{background:var(--garden);color:#fff;border-radius:22px;padding:24px;font-size:15px}
-  .stats b{display:block;font-size:38px;line-height:1.1;color:var(--sunflower);margin-bottom:6px}
+  .stats b{display:block;font-size:40px;line-height:1.1;color:var(--sunflower);margin-bottom:6px;font-weight:800}
+
+  /* YouTube */
+  .yt{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:32px;padding:40px;box-shadow:var(--shadow)}
+  @media(max-width:860px){.yt{grid-template-columns:1fr;padding:28px}}
+  .yt p{color:var(--muted);margin-bottom:24px;max-width:32em}
+  .screen{aspect-ratio:16/9;border-radius:22px;background:linear-gradient(150deg,var(--garden),var(--bay));display:grid;place-items:center;text-decoration:none;position:relative;overflow:hidden}
+  .screen::after{content:"@leloc2025";position:absolute;left:18px;bottom:14px;color:#fff;font-weight:600;font-size:14px;opacity:.9}
+  .play{width:78px;height:78px;border-radius:50%;background:#fff;display:grid;place-items:center;transition:transform .2s}
+  .screen:hover .play{transform:scale(1.08)}
+  .play::before{content:"";border-style:solid;border-width:14px 0 14px 23px;border-color:transparent transparent transparent var(--garden);margin-left:6px}
 
   /* Hỏi đáp */
   details{border-bottom:1px solid var(--line);padding:18px 0;max-width:780px}
-  summary{font-weight:700;font-size:18px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--bay)}
-  summary::after{content:"+";color:var(--garden);font-size:24px;line-height:1}
+  summary{font-weight:700;font-size:18px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--head)}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--accent);font-size:24px;line-height:1}
   details[open] summary::after{content:"-"}
-  details p{margin-top:10px;color:#3b4a3d}
+  details p{margin-top:10px;color:var(--muted)}
 
   /* Kết */
-  .final{background:var(--bay);color:#fff;text-align:left;border-radius:36px;padding:56px 44px;position:relative;overflow:hidden}
+  .final{background:linear-gradient(150deg,var(--bay),var(--garden));color:#fff;border-radius:36px;padding:56px 44px;position:relative;overflow:hidden}
   .final::after{content:"";position:absolute;width:320px;height:320px;right:-90px;bottom:-130px;background:rgba(239,172,41,.2);border-radius:60% 40% 50% 50%}
   .final h2{color:#fff;position:relative;z-index:1}
   .final p{max-width:34em;margin-bottom:28px;opacity:.92;position:relative;z-index:1}
   .final .cta-row{position:relative;z-index:1}
+  .final .btn.ghost{border-color:#fff;color:#fff!important}
+  @media(max-width:600px){.final{padding:40px 26px}}
 
-  footer{padding:44px 0 56px;font-size:14px;color:#4a5a4c}
-  footer .id{font-weight:700;color:var(--garden);font-size:16px;margin-bottom:10px}
-  footer .disc{font-style:italic;font-weight:200;color:#3b4a3d;max-width:60em;margin-top:10px}
+  footer{padding:44px 0 56px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
+  footer .id{font-weight:800;color:var(--accent);font-size:16px;margin-bottom:8px}
+  .social{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+  .social a{text-decoration:none;font-weight:600;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--head)}
+  .social a:hover{border-color:var(--accent);color:var(--accent)}
+  footer .disc{font-style:italic;font-weight:300;max-width:60em;margin-top:10px}
 </style>
 </head>
 <body>
@@ -133,7 +209,9 @@
       <a href="#hanh-trinh">Cách đồng hành</a>
       <a href="#loi-moi">Bắt đầu</a>
       <a href="#ve-loc">Câu chuyện</a>
+      <a href="#youtube">YouTube</a>
       <a href="#hoi-dap">Hỏi đáp</a>
+      <button class="theme" id="theme-btn" type="button" aria-label="Đổi nền sáng tối" title="Đổi nền sáng tối">🌙</button>
       <a class="btn small" data-chat href="#">Nhắn Lộc</a>
     </nav>
   </div>
@@ -141,40 +219,79 @@
 
 <main id="top">
   <div class="hero">
-    <div class="wrap">
-      <span class="tag">Nhóm Dinh Dưỡng tại Thủ Đức, TP.HCM</span>
-      <h1>Bận rộn vẫn <em>ăn uống lành mạnh</em> được, nếu có người đi cùng.</h1>
-      <p class="lead">Lộc đồng hành cùng anh chị bận rộn xây thói quen ăn uống cân bằng: có bữa ăn gợi ý, có người hỏi thăm mỗi ngày, có nhóm cùng thực hành.</p>
-      <div class="cta-row">
-        <a class="btn mango" data-chat href="#">Nhắn Lộc để bắt đầu</a>
-        <a class="btn ghost" href="#loi-moi">Xem hai cách tham gia</a>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tag"><i></i>Nhóm Dinh Dưỡng tại Thủ Đức, TP.HCM</span>
+        <h1>Bận rộn vẫn ăn uống lành mạnh được.<em>Nếu có người đi cùng.</em></h1>
+        <p class="lead">Lộc đồng hành cùng anh chị bận rộn xây thói quen ăn uống cân bằng: có bữa ăn gợi ý, có người hỏi thăm mỗi ngày, có nhóm cùng thực hành.</p>
+        <div class="cta-row">
+          <a class="btn mango" data-chat href="#">Nhắn Lộc để bắt đầu</a>
+          <a class="btn ghost" href="#ve-loc">Đọc câu chuyện của Lộc</a>
+        </div>
+        <ul class="checks">
+          <li>Trao đổi qua tin nhắn</li>
+          <li>Đi từng bước nhỏ</li>
+          <li>Không bắt buộc kinh doanh</li>
+        </ul>
       </div>
+      <div class="portrait">
+        <div class="photo"><img src="loc.jpg" alt="Lê Lộc" width="720" height="900"></div>
+        <div class="chip c1"><i></i><div>Bữa ăn gợi ý<small>Vừa với lịch bận</small></div></div>
+        <div class="chip c2"><i></i><div>Hỏi thăm mỗi ngày<small>Có người nhắc</small></div></div>
+        <div class="chip c3"><i></i><div>Chào, em là Lộc!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <p>Một cách đồng hành cho người bận</p>
+    <div class="marquee" aria-hidden="true">
+      <span>Bữa ăn gợi ý</span><span>Hỏi thăm mỗi ngày</span><span>Nhóm cùng thực hành</span><span>Trao đổi qua tin nhắn</span><span>Nhóm Dinh Dưỡng Thủ Đức</span><span>Từng bước nhỏ</span><span>Ăn uống khoa học</span><span>Lối sống lành mạnh</span>
+      <span>Bữa ăn gợi ý</span><span>Hỏi thăm mỗi ngày</span><span>Nhóm cùng thực hành</span><span>Trao đổi qua tin nhắn</span><span>Nhóm Dinh Dưỡng Thủ Đức</span><span>Từng bước nhỏ</span><span>Ăn uống khoa học</span><span>Lối sống lành mạnh</span>
     </div>
   </div>
 
   <section>
     <div class="wrap">
-      <div class="eyebrow">Có phải anh chị đang như vậy</div>
-      <h2>Biết là nên ăn uống tử tế hơn, mà ngày nào cũng cuốn theo công việc.</h2>
+      <div class="eyebrow">Nghe quen không?</div>
+      <h2>Biết là nên ăn uống tử tế hơn. <em>Mà ngày nào cũng cuốn theo công việc.</em></h2>
       <p class="sub">Phần lớn người tìm đến Lộc không thiếu quyết tâm. Họ thiếu một cách làm vừa với lịch bận rộn của mình.</p>
-      <div class="pains">
-        <div class="pain"><span>⏰</span><b>Không có thời gian</b>Sáng vội, trưa ăn tạm, tối ăn bù. Tuần nào cũng định bắt đầu lại.</div>
-        <div class="pain"><span>🥗</span><b>Không biết ăn sao cho đủ</b>Đọc nhiều nhưng mỗi nơi nói một kiểu, không biết áp dụng vào mâm cơm nhà mình.</div>
-        <div class="pain"><span>🔁</span><b>Làm được vài hôm rồi bỏ</b>Tự làm một mình thì dễ nản. Không ai nhắc, không ai xem giúp.</div>
+      <div class="cards">
+        <div class="ncard"><span class="no">01</span><b>Không có thời gian</b>Sáng vội, trưa ăn tạm, tối ăn bù. Tuần nào cũng định bắt đầu lại.</div>
+        <div class="ncard"><span class="no">02</span><b>Không biết ăn sao cho đủ</b>Đọc nhiều nhưng mỗi nơi nói một kiểu, không biết áp dụng vào mâm cơm nhà mình.</div>
+        <div class="ncard"><span class="no">03</span><b>Làm được vài hôm rồi bỏ</b>Tự làm một mình thì dễ nản. Không ai nhắc, không ai xem giúp.</div>
+      </div>
+      <div class="compare">
+        <div class="col">
+          <h3>Tự xoay một mình</h3>
+          <ul>
+            <li>Mỗi ngày tự nghĩ hôm nay ăn gì</li>
+            <li>Đọc mỗi nơi một kiểu, không biết theo ai</li>
+            <li>Lỡ một bữa là bỏ luôn cả tuần</li>
+          </ul>
+        </div>
+        <div class="col after">
+          <h3>Khi có người đi cùng</h3>
+          <ul>
+            <li>Có bữa ăn gợi ý, làm theo được ngay</li>
+            <li>Có người xem bữa ăn và góp ý mỗi ngày</li>
+            <li>Lỡ một bữa thì hôm sau đi tiếp, có nhóm cùng thực hành</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="journey" id="hanh-trinh">
+  <section class="softbg" id="hanh-trinh">
     <div class="wrap">
       <div class="eyebrow">Cách Lộc đồng hành</div>
-      <h2>Bốn chặng, đi từng bước nhỏ.</h2>
+      <h2>Bốn chặng. <em>Đi từng bước nhỏ.</em></h2>
       <p class="sub">Không ép, không vội. Mỗi chặng chỉ thêm một thói quen để anh chị giữ được lâu.</p>
       <div class="steps">
-        <div class="step"><div class="num">1</div><div><h3>Trò chuyện</h3><p>Lộc hỏi về thói quen ăn uống, lịch làm việc và điều anh chị mong muốn.</p></div></div>
-        <div class="step"><div class="num">2</div><div><h3>Bữa ăn gợi ý</h3><p>Anh chị nhận gợi ý bữa ăn cân bằng, dễ làm theo với lịch bận rộn.</p></div></div>
-        <div class="step"><div class="num">3</div><div><h3>Hỏi thăm mỗi ngày</h3><p>Chụp bữa ăn gửi qua, Lộc xem và góp ý. Có người nhắc thì dễ giữ nhịp hơn.</p></div></div>
-        <div class="step"><div class="num">4</div><div><h3>Thành thói quen</h3><p>Khi đã quen, anh chị tự chủ động được bữa ăn của mình và của gia đình.</p></div></div>
+        <div class="step"><div class="num">1</div><h3>Trò chuyện</h3><p>Lộc hỏi về thói quen ăn uống, lịch làm việc và điều anh chị mong muốn.</p></div>
+        <div class="step"><div class="num">2</div><h3>Bữa ăn gợi ý</h3><p>Anh chị nhận gợi ý bữa ăn cân bằng, dễ làm theo với lịch bận rộn.</p></div>
+        <div class="step"><div class="num">3</div><h3>Hỏi thăm mỗi ngày</h3><p>Chụp bữa ăn gửi qua, Lộc xem và góp ý. Có người nhắc thì dễ giữ nhịp hơn.</p></div>
+        <div class="step"><div class="num">4</div><h3>Thành thói quen</h3><p>Khi đã quen, anh chị tự chủ động được bữa ăn của mình và của gia đình.</p></div>
       </div>
     </div>
   </section>
@@ -182,7 +299,7 @@
   <section id="loi-moi">
     <div class="wrap">
       <div class="eyebrow">Hai lời mời riêng biệt</div>
-      <h2>Anh chị chọn điều phù hợp với mình.</h2>
+      <h2>Anh chị chọn điều <em>phù hợp với mình.</em></h2>
       <p class="sub">Chăm sóc sức khỏe và hợp tác kinh doanh là hai việc khác nhau. Anh chị có thể chỉ chọn một.</p>
       <div class="two">
         <div class="card health">
@@ -196,7 +313,7 @@
           <a class="btn" data-chat="SỨC KHỎE" href="#">Nhắn "SỨC KHỎE"</a>
         </div>
         <div class="card biz">
-          <div class="label" style="color:var(--garden)">Lời mời 2</div>
+          <div class="label">Lời mời 2</div>
           <h3>Tìm hiểu cơ hội hợp tác</h3>
           <ul>
             <li>Dành cho người thích chăm sóc người khác và sẵn sàng làm việc thật</li>
@@ -210,40 +327,53 @@
     </div>
   </section>
 
-  <section id="ve-loc" style="background:var(--soft)">
-    <div class="wrap about">
-      <div class="photo"><img src="loc.jpg" alt="Lê Lộc" width="720" height="900"></div>
-      <div>
-        <div class="eyebrow">Câu chuyện của Lộc</div>
-        <h2>Em từng nghĩ cứ kiếm được tiền là ổn. Cho đến khi cơ thể lên tiếng.</h2>
-        <p>👋 Em là <b>Lê Lộc</b>. Năm 2017, em khởi nghiệp trong ngành phế liệu điện tử. Công việc ổn định, thu nhập tốt.</p>
-        <p>Nhưng càng bận, em càng bỏ bê bản thân. Cân nặng tăng dần, người thường xuyên mệt mỏi. Có những ngày em làm việc bằng cà phê và ý chí.</p>
-        <p>Lúc đó em mới hiểu: <b>sức khỏe là tài sản quan trọng nhất của một người làm kinh doanh</b>.</p>
+  <section id="ve-loc" class="softbg">
+    <div class="wrap">
+      <div class="eyebrow">Câu chuyện của Lộc</div>
+      <h2>Em từng nghĩ cứ kiếm được tiền là ổn. <em>Cho đến khi cơ thể lên tiếng.</em></h2>
+      <div class="story-grid">
+        <div>
+          <p>Em là <b>Lê Lộc</b>. Năm 2017, em khởi nghiệp trong ngành phế liệu điện tử. Công việc ổn định, thu nhập tốt.</p>
+          <p>Nhưng càng bận, em càng bỏ bê bản thân. Cân nặng tăng dần, người thường xuyên mệt mỏi. Có những ngày em làm việc bằng cà phê và ý chí.</p>
+          <p>Lúc đó em mới hiểu: <b>sức khỏe là tài sản quan trọng nhất của một người làm kinh doanh</b>. Mất nó thì mọi thứ khác đều chậm lại.</p>
+        </div>
+        <div class="turn">
+          <h3>🔑 Bước ngoặt</h3>
+          <p>Em may mắn được giới thiệu một chương trình <b>chăm sóc sức khỏe chủ động</b>. Em bắt đầu từ việc đơn giản nhất: ăn uống lại cho đúng, mỗi ngày một chút, và có người đồng hành nhắc mình.</p>
+          <p>Sau một thời gian, em <b>giảm cân</b>, cơ thể nhẹ nhàng và <b>nhiều năng lượng hơn hẳn</b>. Quan trọng hơn, em giữ được thói quen đó đến hôm nay. Từ trải nghiệm của chính mình, em chọn việc này làm sự nghiệp.</p>
+          <p class="disc">Kết quả trên không phải là điển hình, mỗi cá nhân khác nhau có kết quả khác nhau.</p>
+        </div>
       </div>
-    </div>
-    <div class="wrap story">
-      <div class="turn">
-        <h3>🔑 Bước ngoặt</h3>
-        <p>Em may mắn được giới thiệu một chương trình <b>chăm sóc sức khỏe chủ động</b>. Em bắt đầu từ việc đơn giản nhất: ăn uống lại cho đúng, mỗi ngày một chút, và có người đồng hành nhắc mình.</p>
-        <p>Sau một thời gian, em <b>giảm cân</b>, cơ thể nhẹ nhàng và <b>nhiều năng lượng hơn hẳn</b>. Quan trọng hơn, em giữ được thói quen đó đến hôm nay. Từ trải nghiệm của chính mình, em chọn việc này làm sự nghiệp.</p>
-        <p class="disc">Kết quả trên không phải là điển hình, mỗi cá nhân khác nhau có kết quả khác nhau.</p>
-      </div>
+
       <h3 class="mt">🎯 Hiện tại em làm ba việc</h3>
-      <div class="pains">
-        <div class="pain white"><span>🥗</span><b>Hướng dẫn ăn uống khoa học</b>Kiểm soát cân nặng và xây lối sống lành mạnh.</div>
-        <div class="pain white"><span>🎓</span><b>Đào tạo, cố vấn</b>Cho anh chị muốn phát triển sự nghiệp trong lĩnh vực chăm sóc sức khỏe chủ động.</div>
-        <div class="pain white"><span>🌱</span><b>Chuỗi Nhóm Dinh Dưỡng</b>Phát triển mô hình đơn giản, dễ nhân rộng.</div>
+      <div class="cards">
+        <div class="ncard"><span class="no">01</span><b>Hướng dẫn ăn uống khoa học</b>Kiểm soát cân nặng và xây lối sống lành mạnh.</div>
+        <div class="ncard"><span class="no">02</span><b>Đào tạo, cố vấn</b>Cho anh chị muốn phát triển sự nghiệp trong lĩnh vực chăm sóc sức khỏe chủ động.</div>
+        <div class="ncard"><span class="no">03</span><b>Chuỗi Nhóm Dinh Dưỡng</b>Phát triển mô hình đơn giản, dễ nhân rộng.</div>
       </div>
       <div class="stats">
         <div><b>100+</b>hội viên em đã đồng hành</div>
         <div><b>Gần 20</b>thành viên khởi nghiệp cùng em</div>
         <div><b>100+</b>sự kiện sức khỏe trong và ngoài nước</div>
       </div>
-      <a class="btn" href="https://www.facebook.com/leloc2007" target="_blank" rel="noopener">Xem Facebook của Lộc</a>
     </div>
   </section>
 
-  <section id="hoi-dap">
+  <section id="youtube">
+    <div class="wrap">
+      <div class="yt">
+        <div>
+          <div class="eyebrow">Kênh YouTube</div>
+          <h2>Xem Lộc chia sẻ <em>trên YouTube.</em></h2>
+          <p>Lộc chia sẻ về thói quen ăn uống, lối sống lành mạnh và hành trình làm nghề trên kênh @leloc2025. Anh chị ghé xem và đăng ký để theo dõi video mới.</p>
+          <a class="btn" href="https://www.youtube.com/@leloc2025" target="_blank" rel="noopener">Mở kênh @leloc2025</a>
+        </div>
+        <a class="screen" href="https://www.youtube.com/@leloc2025" target="_blank" rel="noopener" aria-label="Mở kênh YouTube của Lộc"><span class="play"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="hoi-dap" style="padding-top:0">
     <div class="wrap">
       <div class="eyebrow">Hỏi đáp</div>
       <h2>Vài điều anh chị hay hỏi.</h2>
@@ -261,7 +391,7 @@
         <p>Anh chị kể Lộc nghe một ngày ăn uống của mình. Từ đó mình cùng tìm bước đầu tiên phù hợp.</p>
         <div class="cta-row">
           <a class="btn mango" data-chat href="#">Nhắn Lộc qua Messenger</a>
-          <a class="btn ghost" id="zalo-btn" style="border-color:#fff;color:#fff!important;display:none" href="#">Nhắn qua Zalo</a>
+          <a class="btn ghost" id="zalo-btn" style="display:none" href="#">Nhắn qua Zalo</a>
         </div>
       </div>
     </div>
@@ -272,6 +402,12 @@
   <div class="wrap">
     <div class="id">Lê Lộc - Thành Viên Độc Lập Herbalife</div>
     <p>Thủ Đức, TP. Hồ Chí Minh</p>
+    <div class="social">
+      <a href="https://www.facebook.com/leloc2007" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.youtube.com/@leloc2025" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://github.com/Leloc2007" target="_blank" rel="noopener">GitHub</a>
+      <a id="zalo-foot" style="display:none" href="#">Zalo</a>
+    </div>
     <p class="disc">Đây là trang cá nhân của một Thành Viên Độc Lập Herbalife, không phải trang chính thức của Công ty Herbalife Việt Nam. Sản phẩm không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh. Kết quả của mỗi người khác nhau. Thông tin trên trang chỉ để tham khảo, không thay cho tư vấn y tế.</p>
   </div>
 </footer>
@@ -279,7 +415,7 @@
 <script>
   // === CẤU HÌNH LIÊN HỆ: chỉ cần sửa 2 dòng dưới ===
   var MESSENGER = "https://m.me/leloc2007";   // tên Facebook của Lộc
-  var ZALO_PHONE = "0909306609";                        // điền số Zalo, vd "0901234567"; để trống thì ẩn nút Zalo
+  var ZALO_PHONE = "0909306609";              // để trống thì ẩn nút Zalo
 
   document.querySelectorAll("[data-chat]").forEach(function (a) {
     var text = a.getAttribute("data-chat");
@@ -287,9 +423,22 @@
     a.target = "_blank"; a.rel = "noopener";
   });
   if (ZALO_PHONE) {
-    var z = document.getElementById("zalo-btn");
-    z.href = "https://zalo.me/" + ZALO_PHONE; z.target = "_blank"; z.style.display = "inline-block";
+    ["zalo-btn", "zalo-foot"].forEach(function (id) {
+      var z = document.getElementById(id);
+      z.href = "https://zalo.me/" + ZALO_PHONE; z.target = "_blank"; z.rel = "noopener"; z.style.display = "inline-block";
+    });
   }
+
+  // Nút đổi nền sáng tối (lựa chọn giữ trong phiên xem này; lần sau lại theo giờ của người đọc)
+  var root = document.documentElement, tb = document.getElementById("theme-btn");
+  function paint() { tb.textContent = root.getAttribute("data-theme") === "dark" ? "☀️" : "🌙"; }
+  paint();
+  tb.addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { sessionStorage.setItem("theme", next); } catch (e) {}
+    paint();
+  });
 </script>
 </body>
 </html>
