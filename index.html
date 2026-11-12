@@ -1,444 +1,1352 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lê Lộc - Đồng hành ăn uống lành mạnh | Thành Viên Độc Lập Herbalife</title>
-<meta name="description" content="Lộc đồng hành cùng người bận rộn xây thói quen ăn uống lành mạnh tại Nhóm Dinh Dưỡng ở Thủ Đức. Trang cá nhân của Thành Viên Độc Lập Herbalife.">
-<meta property="og:title" content="Lê Lộc - Đồng hành ăn uống lành mạnh">
-<meta property="og:description" content="Bận rộn vẫn ăn uống lành mạnh được. Nhắn Lộc để bắt đầu.">
+<title>Lê Lộc · Đồng hành Sức khỏe & Sự nghiệp | Thành Viên Độc Lập Herbalife</title>
+<meta name="description" content="Lê Lộc đồng hành cùng người bận rộn xây dựng lối sống lành mạnh, kiểm soát cân nặng khoa học và phát triển sự nghiệp Huấn luyện viên Sức khỏe bền vững.">
+<meta property="og:title" content="Lê Lộc · Đồng hành Sức khỏe & Sự nghiệp">
+<meta property="og:description" content="Bận rộn vẫn ăn uống lành mạnh và làm chủ sức khỏe được. Cùng Lộc đi từng bước nhỏ bền vững.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://leloc2007.github.io/leloc2007/">
 <meta property="og:image" content="https://leloc2007.github.io/leloc2007/loc.jpg">
 <meta name="color-scheme" content="light dark">
+
+<!-- Tự động chỉnh nền sáng/tối theo múi giờ địa phương của người đọc: 6h - 18h sáng, 18h - 6h tối -->
 <script>
-  // Nền sáng hay tối theo GIỜ ĐỊA PHƯƠNG của người đọc (múi giờ trên máy họ):
-  // 6:00 đến 17:59 là nền sáng, còn lại là nền tối. Bấm nút trên thanh đầu trang để tự đổi.
   (function () {
-    var chosen = null;
-    try { chosen = sessionStorage.getItem("theme"); } catch (e) {}
-    var h = new Date().getHours();
-    document.documentElement.setAttribute("data-theme", chosen || (h >= 6 && h < 18 ? "light" : "dark"));
+    var saved = null;
+    try { saved = localStorage.getItem('loc-theme') || sessionStorage.getItem('theme'); } catch (e) {}
+    if (saved === 'light' || saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', saved);
+    } else {
+      var h = new Date().getHours();
+      var autoTheme = (h >= 6 && h < 18) ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', autoTheme);
+    }
   })();
 </script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --garden:#266431; --rosemary:#3A5137; --bay:#224945; --night:#101820;
-    --mango:#EFAC29; --sunflower:#FFF176;
-    /* nền sáng */
-    --bg:#FFFFFF; --soft:#F4F8F4; --card:#FFFFFF; --line:#DCE7DD;
-    --text:#101820; --muted:#3b4a3d; --accent:#266431; --head:#224945;
-    --hero-a:#266431; --hero-b:#1f5529; --bar:rgba(255,255,255,.92);
-    --shadow:0 14px 40px rgba(16,24,32,.10);
+  :root {
+    --font: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+    --r: 22px;
+    --r-sm: 14px;
+    --wrap: 1140px;
+    --ease: cubic-bezier(.2, .8, .2, 1);
+    --spring: cubic-bezier(.34, 1.56, .64, 1);
   }
-  html[data-theme="dark"]{
-    --bg:#101820; --soft:#152129; --card:#1A2831; --line:#2A3B43;
-    --text:#EAF2EC; --muted:#A9BBAE; --accent:#7FD08C; --head:#EAF2EC;
-    --hero-a:#16352A; --hero-b:#101820; --bar:rgba(16,24,32,.88);
-    --shadow:0 14px 40px rgba(0,0,0,.45);
+
+  /* Giao diện tối (Dark mode) */
+  :root[data-theme="dark"] {
+    --bg: #090e0c;
+    --bg-2: #101814;
+    --bg-3: #16221c;
+    --card: rgba(255, 255, 255, 0.05);
+    --card-2: rgba(255, 255, 255, 0.09);
+    --line: rgba(255, 255, 255, 0.12);
+    --line-2: rgba(255, 255, 255, 0.22);
+    --text: #eaf3ed;
+    --text-hi: #ffffff;
+    --muted: #9eb5a5;
+    --dim: #6d8474;
+    --accent: #2db55d;
+    --accent-2: #65d98b;
+    --accent-deep: #1e8341;
+    --accent-ink: #65d98b;
+    --accent-wash: rgba(45, 181, 93, 0.14);
+    --accent-line: rgba(45, 181, 93, 0.35);
+    --gold: #efac29;
+    --gold-ink: #ffd070;
+    --gold-wash: rgba(239, 172, 41, 0.14);
+    --on-accent: #05140a;
+    --nav-bg: rgba(9, 14, 12, 0.82);
+    --shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.7);
+    --glow: radial-gradient(circle at 50% -20%, rgba(45, 181, 93, 0.18), transparent 70%);
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:"Be Vietnam Pro",system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.65;font-size:17px;transition:background .3s,color .3s}
-  a{color:inherit}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
 
-  /* Thanh trên */
-  header{position:sticky;top:0;z-index:20;background:var(--bar);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .bar{display:flex;align-items:center;justify-content:space-between;height:66px;gap:12px}
-  .brand{font-weight:800;color:var(--accent);text-decoration:none;font-size:19px;line-height:1.2}
-  .brand small{display:block;font-weight:400;font-size:12px;color:var(--muted);letter-spacing:.3px}
-  nav{display:flex;align-items:center;gap:22px}
-  nav a{text-decoration:none;font-weight:500;font-size:15px;color:var(--muted)}
-  nav a:hover{color:var(--accent)}
-  @media(max-width:820px){nav a:not(.btn){display:none}nav{gap:10px}}
-  .theme{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:18px;cursor:pointer;display:grid;place-items:center}
-  .theme:hover{border-color:var(--accent)}
+  /* Giao diện sáng (Light mode) */
+  :root[data-theme="light"] {
+    --bg: #f9fbf9;
+    --bg-2: #ffffff;
+    --bg-3: #f0f5f1;
+    --card: rgba(38, 100, 49, 0.04);
+    --card-2: rgba(38, 100, 49, 0.08);
+    --line: rgba(38, 100, 49, 0.12);
+    --line-2: rgba(38, 100, 49, 0.24);
+    --text: #18241b;
+    --text-hi: #0c170f;
+    --muted: #4e6353;
+    --dim: #7a9180;
+    --accent: #266431;
+    --accent-2: #2db55d;
+    --accent-deep: #1b4923;
+    --accent-ink: #1e8341;
+    --accent-wash: rgba(38, 100, 49, 0.08);
+    --accent-line: rgba(38, 100, 49, 0.28);
+    --gold: #d99113;
+    --gold-ink: #a56a00;
+    --gold-wash: rgba(217, 145, 19, 0.1);
+    --on-accent: #ffffff;
+    --nav-bg: rgba(249, 251, 249, 0.88);
+    --shadow: 0 20px 50px -20px rgba(27, 73, 35, 0.15);
+    --glow: radial-gradient(circle at 50% -20%, rgba(38, 100, 49, 0.12), transparent 70%);
+  }
 
-  .btn{display:inline-block;background:var(--garden);color:#fff!important;padding:13px 26px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px;transition:transform .15s, box-shadow .15s;border:2px solid var(--garden)}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(38,100,49,.3)}
-  .btn.ghost{background:transparent;color:var(--accent)!important;border-color:var(--accent)}
-  .btn.mango{background:var(--mango);border-color:var(--mango);color:var(--night)!important}
-  .btn.small{padding:9px 18px;font-size:14px}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 16.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.4s var(--ease), color 0.4s var(--ease);
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  button { font: inherit; color: inherit; cursor: pointer; background: transparent; border: 0; }
 
-  /* Hero */
-  .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--hero-a),var(--hero-b));color:#fff;padding:72px 0 84px}
-  .hero::before,.hero::after{content:"";position:absolute;border-radius:62% 38% 55% 45% / 48% 60% 40% 52%}
-  .hero::before{width:560px;height:560px;right:-180px;top:-160px;background:rgba(255,255,255,.06)}
-  .hero::after{width:320px;height:320px;left:-120px;bottom:-190px;background:rgba(239,172,41,.14)}
-  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center}
-  @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero{padding:52px 0 64px}}
-  .tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:7px 16px;border-radius:999px;font-size:14px;font-weight:500;margin-bottom:24px}
-  .tag i{width:8px;height:8px;border-radius:50%;background:var(--sunflower);display:inline-block}
-  h1{font-size:clamp(36px,5.6vw,62px);line-height:1.1;font-weight:800;letter-spacing:-1px}
-  h1 em{font-style:normal;color:var(--sunflower);display:block}
-  .hero p.lead{font-size:clamp(17px,2vw,20px);max-width:33em;margin:24px 0 32px;opacity:.93}
-  .cta-row{display:flex;flex-wrap:wrap;gap:14px}
-  .hero .btn.ghost{border-color:rgba(255,255,255,.7);color:#fff!important}
-  .checks{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:28px;font-size:14.5px;opacity:.92;list-style:none}
-  .checks li::before{content:"✓";color:var(--sunflower);font-weight:800;margin-right:8px}
+  .wrap { width: min(var(--wrap), calc(100% - 44px)); margin: 0 auto; }
 
-  .portrait{position:relative;max-width:360px;margin:0 auto;width:100%}
-  .photo{aspect-ratio:4/5;border-radius:46% 54% 42% 58% / 52% 44% 56% 48%;overflow:hidden;background:var(--bay);box-shadow:0 30px 60px rgba(0,0,0,.35)}
-  .photo img{width:100%;height:100%;object-fit:cover;display:block}
-  .chip{position:absolute;background:#fff;color:var(--night);border-radius:16px;padding:10px 14px;font-size:13.5px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.25);display:flex;align-items:center;gap:9px;animation:float 5s ease-in-out infinite}
-  .chip small{display:block;font-weight:400;color:#4a5a4c;font-size:12px}
-  .chip i{width:10px;height:10px;border-radius:50%;background:var(--garden);flex:0 0 10px}
-  .chip.c1{left:-18px;top:12%}
-  .chip.c2{right:-14px;top:48%;animation-delay:1.2s}
-  .chip.c2 i{background:var(--mango)}
-  .chip.c3{left:4%;bottom:6%;animation-delay:2.4s}
-  @media(max-width:900px){.chip.c1{left:0}.chip.c2{right:0}}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  /* Navigation Bar */
+  .nav {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 100;
+    height: 70px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: 16px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--text-hi);
+  }
+  .brand-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 19px;
+    box-shadow: 0 4px 14px var(--accent-wash);
+  }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+  .brand-text small {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+  }
 
-  /* Dải chạy */
-  .strip{border-bottom:1px solid var(--line);background:var(--soft);padding:18px 0;overflow:hidden}
-  .strip p{text-align:center;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:12px}
-  .marquee{display:flex;width:max-content;animation:run 34s linear infinite}
-  .marquee span{white-space:nowrap;margin:0 8px;padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-weight:600;font-size:14.5px;color:var(--head)}
-  @keyframes run{to{transform:translateX(-50%)}}
-  @media(prefers-reduced-motion:reduce){.marquee,.chip{animation:none}}
+  .nav-links { display: flex; align-items: center; gap: 6px; }
+  .nav-links a {
+    padding: 8px 14px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--muted);
+    border-radius: 10px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-links a:hover {
+    color: var(--text-hi);
+    background: var(--card-2);
+  }
 
-  section{padding:84px 0}
-  .eyebrow{color:var(--accent);font-weight:700;font-size:13.5px;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:12px}
-  h2{font-size:clamp(28px,4vw,44px);line-height:1.18;max-width:17em;margin-bottom:18px;letter-spacing:-.6px;font-weight:800;color:var(--head)}
-  h2 em{font-style:normal;color:var(--accent)}
-  .sub{max-width:38em;color:var(--muted);margin-bottom:40px}
-  .softbg{background:var(--soft)}
+  .nav-right { display: flex; align-items: center; gap: 10px; }
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    display: grid;
+    place-items: center;
+    font-size: 17px;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .icon-btn:hover {
+    border-color: var(--accent-line);
+    color: var(--text-hi);
+    transform: translateY(-2px);
+    background: var(--card-2);
+  }
+  .icon-btn svg { width: 19px; height: 19px; fill: currentColor; }
 
-  /* Thẻ đánh số */
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-  .ncard{background:var(--card);border-radius:22px;padding:28px;border:1px solid var(--line);color:var(--muted);transition:transform .2s, box-shadow .2s}
-  .ncard:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-  .ncard .no{font-size:14px;font-weight:800;color:var(--accent);letter-spacing:1px;margin-bottom:14px;display:block}
-  .ncard b{display:block;font-size:19px;margin-bottom:6px;color:var(--head)}
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    height: 46px;
+    padding: 0 22px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: transform 0.2s var(--ease), box-shadow 0.2s, background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    color: var(--on-accent) !important;
+    box-shadow: 0 10px 24px -6px var(--accent-line);
+  }
+  :root[data-theme="light"] .btn-primary {
+    background: linear-gradient(135deg, #2db55d, #1e8341);
+    color: #ffffff !important;
+  }
+  .btn-gold {
+    background: linear-gradient(135deg, #ffd070, var(--gold));
+    color: #1a1202 !important;
+    font-weight: 700;
+    box-shadow: 0 10px 24px -6px rgba(239, 172, 41, 0.4);
+  }
+  .btn-ghost {
+    background: var(--card);
+    border-color: var(--line);
+    color: var(--text-hi) !important;
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent-line);
+    background: var(--card-2);
+  }
+  .btn-sm { height: 38px; padding: 0 16px; font-size: 13.5px; }
 
-  /* Trước đây và khi có người đi cùng */
-  .compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:28px}
-  .col{border-radius:24px;padding:28px;border:1px solid var(--line);background:var(--card)}
-  .col.after{background:var(--garden);border-color:var(--garden);color:#fff}
-  .col h3{font-size:14px;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:14px;color:var(--muted)}
-  .col.after h3{color:var(--sunflower)}
-  .col ul{list-style:none}
-  .col li{padding:9px 0 9px 30px;position:relative;border-top:1px dashed var(--line)}
-  .col.after li{border-top-color:rgba(255,255,255,.22)}
-  .col li:first-child{border-top:0}
-  .col li::before{content:"×";position:absolute;left:4px;color:var(--muted);font-weight:700}
-  .col.after li::before{content:"✓";color:var(--sunflower)}
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+  }
 
-  /* Hành trình */
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;position:relative}
-  .step{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px}
-  .num{width:46px;height:46px;border-radius:50%;background:var(--garden);color:#fff;font-weight:800;font-size:19px;display:grid;place-items:center;margin-bottom:16px}
-  .step:last-child .num{background:var(--mango);color:var(--night)}
-  .step h3{font-size:20px;margin-bottom:6px;color:var(--head)}
-  .step p{color:var(--muted);font-size:16px}
+  /* Hero Section */
+  .hero {
+    position: relative;
+    padding: 130px 0 70px;
+    background: var(--glow);
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 48px;
+    align-items: center;
+  }
+  @media (max-width: 920px) {
+    .hero { padding: 110px 0 50px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
 
-  /* Hai lời mời */
-  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
-  .card{border-radius:28px;padding:36px 32px;display:flex;flex-direction:column}
-  .card.health{background:var(--garden);color:#fff}
-  .card.biz{background:var(--card);border:2px solid var(--accent)}
-  .card .label{font-size:13px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;opacity:.85;margin-bottom:10px}
-  .card.biz .label{color:var(--accent)}
-  .card h3{font-size:27px;line-height:1.2;margin-bottom:14px;font-weight:800}
-  .card.biz h3{color:var(--head)}
-  .card ul{list-style:none;margin:6px 0 28px}
-  .card li{padding-left:28px;position:relative;margin-bottom:10px}
-  .card li::before{content:"";position:absolute;left:4px;top:10px;width:10px;height:10px;border-radius:50% 0 50% 50%;background:var(--mango);transform:rotate(45deg)}
-  .card .btn{margin-top:auto;align-self:flex-start}
-  .card.health .btn{background:#fff;border-color:#fff;color:var(--garden)!important}
-  .note{font-size:14px;margin-top:16px;color:var(--muted)}
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--accent-wash);
+    border: 1px solid var(--accent-line);
+    color: var(--accent-ink);
+    font-size: 13.5px;
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+  .tag-pill i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+    box-shadow: 0 0 10px var(--accent);
+  }
 
-  /* Câu chuyện */
-  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
-  @media(max-width:860px){.story-grid{grid-template-columns:1fr}}
-  .story-grid p{margin-bottom:14px;color:var(--muted)}
-  .story-grid p b{color:var(--text)}
-  .turn{background:var(--card);border-radius:26px;padding:32px;border:1px solid var(--line);box-shadow:var(--shadow)}
-  .turn h3,.mt{font-size:23px;color:var(--head);margin-bottom:12px;font-weight:800}
-  .turn .disc{font-style:italic;font-weight:300;font-size:15px;margin-bottom:0}
-  .mt{margin-top:48px;margin-bottom:18px}
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin:32px 0}
-  .stats div{background:var(--garden);color:#fff;border-radius:22px;padding:24px;font-size:15px}
-  .stats b{display:block;font-size:40px;line-height:1.1;color:var(--sunflower);margin-bottom:6px;font-weight:800}
+  h1 {
+    font-size: clamp(34px, 4.8vw, 54px);
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    color: var(--text-hi);
+    margin-bottom: 20px;
+  }
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent-2), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+  }
+  .lead {
+    font-size: clamp(16px, 1.8vw, 18.5px);
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 32px;
+    max-width: 580px;
+  }
 
-  /* YouTube */
-  .yt{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:32px;padding:40px;box-shadow:var(--shadow)}
-  @media(max-width:860px){.yt{grid-template-columns:1fr;padding:28px}}
-  .yt p{color:var(--muted);margin-bottom:24px;max-width:32em}
-  .screen{aspect-ratio:16/9;border-radius:22px;background:linear-gradient(150deg,var(--garden),var(--bay));display:grid;place-items:center;text-decoration:none;position:relative;overflow:hidden}
-  .screen::after{content:"@leloc2025";position:absolute;left:18px;bottom:14px;color:#fff;font-weight:600;font-size:14px;opacity:.9}
-  .play{width:78px;height:78px;border-radius:50%;background:#fff;display:grid;place-items:center;transition:transform .2s}
-  .screen:hover .play{transform:scale(1.08)}
-  .play::before{content:"";border-style:solid;border-width:14px 0 14px 23px;border-color:transparent transparent transparent var(--garden);margin-left:6px}
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
 
-  /* Hỏi đáp */
-  details{border-bottom:1px solid var(--line);padding:18px 0;max-width:780px}
-  summary{font-weight:700;font-size:18px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--head)}
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";color:var(--accent);font-size:24px;line-height:1}
-  details[open] summary::after{content:"-"}
-  details p{margin-top:10px;color:var(--muted)}
+  .hero-checks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    margin-top: 28px;
+    list-style: none;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .hero-checks li { display: flex; align-items: center; gap: 8px; }
+  .hero-checks li svg { width: 16px; height: 16px; color: var(--accent-ink); flex-shrink: 0; }
 
-  /* Kết */
-  .final{background:linear-gradient(150deg,var(--bay),var(--garden));color:#fff;border-radius:36px;padding:56px 44px;position:relative;overflow:hidden}
-  .final::after{content:"";position:absolute;width:320px;height:320px;right:-90px;bottom:-130px;background:rgba(239,172,41,.2);border-radius:60% 40% 50% 50%}
-  .final h2{color:#fff;position:relative;z-index:1}
-  .final p{max-width:34em;margin-bottom:28px;opacity:.92;position:relative;z-index:1}
-  .final .cta-row{position:relative;z-index:1}
-  .final .btn.ghost{border-color:#fff;color:#fff!important}
-  @media(max-width:600px){.final{padding:40px 26px}}
+  /* Hero Visual / Bento Card */
+  .hero-visual { position: relative; max-width: 420px; margin: 0 auto; width: 100%; }
+  .photo-frame {
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+  .photo-frame:hover img { transform: scale(1.03); }
 
-  footer{padding:44px 0 56px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
-  footer .id{font-weight:800;color:var(--accent);font-size:16px;margin-bottom:8px}
-  .social{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
-  .social a{text-decoration:none;font-weight:600;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--head)}
-  .social a:hover{border-color:var(--accent);color:var(--accent)}
-  footer .disc{font-style:italic;font-weight:300;max-width:60em;margin-top:10px}
+  .float-badge {
+    position: absolute;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    box-shadow: var(--shadow);
+    animation: float 5s ease-in-out infinite;
+    z-index: 2;
+  }
+  .float-badge .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .float-badge.gold .dot { background: var(--gold); }
+  .float-badge b { display: block; font-size: 13.5px; color: var(--text-hi); font-weight: 700; line-height: 1.2; }
+  .float-badge small { font-size: 11.5px; color: var(--muted); }
+
+  .fb-1 { top: 14%; left: -20px; }
+  .fb-2 { bottom: 18%; right: -16px; animation-delay: 1.8s; }
+  .fb-3 { bottom: -12px; left: 8%; animation-delay: 3s; }
+  @media (max-width: 920px) {
+    .fb-1 { left: 0; }
+    .fb-2 { right: 0; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+  }
+
+  /* Marquee Strip */
+  .strip {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 14px 0;
+    overflow: hidden;
+  }
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: scroll 32s linear infinite;
+  }
+  .marquee span {
+    white-space: nowrap;
+    margin: 0 8px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* Sections general */
+  section { padding: 84px 0; position: relative; }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-ink);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 14px;
+    height: 2px;
+    background: currentColor;
+    display: inline-block;
+  }
+  h2 {
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.22;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text-hi);
+    margin-bottom: 16px;
+  }
+  h2 em {
+    font-style: normal;
+    color: var(--accent-ink);
+  }
+  .sec-desc {
+    font-size: 16.5px;
+    color: var(--muted);
+    max-width: 620px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+
+  /* Bento Grid - Nỗi đau & Giải pháp */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 860px) {
+    .bento-grid { grid-template-columns: 1fr; }
+  }
+
+  .bcard {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 28px;
+    transition: transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .bcard:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-line);
+    box-shadow: var(--shadow);
+  }
+  .bcard-no {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--card-2);
+    border: 1px solid var(--line);
+    color: var(--accent-ink);
+    font-weight: 800;
+    font-size: 14px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 18px;
+  }
+  .bcard h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-hi);
+    margin-bottom: 10px;
+  }
+  .bcard p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Compare Card (Trước vs Sau) */
+  .compare-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  @media (max-width: 780px) { .compare-box { grid-template-columns: 1fr; } }
+
+  .compare-col {
+    padding: 24px;
+    border-radius: var(--r-sm);
+  }
+  .compare-col.before {
+    background: var(--card);
+    border: 1px dashed var(--line);
+  }
+  .compare-col.after {
+    background: var(--accent-wash);
+    border: 1px solid var(--accent-line);
+  }
+  .compare-col h4 {
+    font-size: 14.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--muted);
+  }
+  .compare-col.after h4 { color: var(--accent-ink); }
+  .compare-col ul { list-style: none; }
+  .compare-col li {
+    padding: 10px 0 10px 28px;
+    position: relative;
+    font-size: 15px;
+    border-top: 1px solid var(--line);
+    color: var(--text);
+  }
+  .compare-col li:first-child { border-top: 0; }
+  .compare-col.before li::before {
+    content: "✕";
+    position: absolute;
+    left: 4px;
+    color: var(--dim);
+    font-weight: 700;
+  }
+  .compare-col.after li::before {
+    content: "✓";
+    position: absolute;
+    left: 4px;
+    color: var(--accent-ink);
+    font-weight: 800;
+  }
+
+  /* Hành trình 4 bước */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 960px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 580px) { .steps-grid { grid-template-columns: 1fr; } }
+
+  .step-card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 26px;
+    transition: all 0.25s;
+    position: relative;
+  }
+  .step-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-line);
+    box-shadow: var(--shadow);
+  }
+  .step-num {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+    color: #fff;
+    font-weight: 800;
+    font-size: 17px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 16px var(--accent-wash);
+  }
+  .step-card:last-child .step-num {
+    background: linear-gradient(135deg, var(--gold), #f59e0b);
+    color: #1a1202;
+  }
+  .step-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-hi);
+    margin-bottom: 8px;
+  }
+  .step-card p {
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Lời mời - 2 thẻ Offer */
+  .offers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 820px) { .offers-grid { grid-template-columns: 1fr; } }
+
+  .offer-card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 38px 32px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .offer-card.highlight {
+    border-color: var(--accent-line);
+    background: linear-gradient(180deg, var(--accent-wash), var(--bg-2));
+  }
+  .offer-tag {
+    font-size: 12.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    color: var(--accent-ink);
+    margin-bottom: 12px;
+  }
+  .offer-card.biz .offer-tag { color: var(--gold-ink); }
+  .offer-card h3 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-hi);
+    margin-bottom: 14px;
+    line-height: 1.25;
+  }
+  .offer-card ul {
+    list-style: none;
+    margin: 8px 0 32px;
+    flex: 1;
+  }
+  .offer-card li {
+    padding: 8px 0 8px 26px;
+    position: relative;
+    font-size: 15px;
+    color: var(--text);
+  }
+  .offer-card li::before {
+    content: "✓";
+    position: absolute;
+    left: 2px;
+    color: var(--accent-ink);
+    font-weight: 800;
+  }
+  .offer-card.biz li::before { color: var(--gold); }
+  .offer-card .btn { align-self: flex-start; }
+
+  /* Câu chuyện của Lộc */
+  .story-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 36px;
+    align-items: start;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 860px) { .story-layout { grid-template-columns: 1fr; } }
+
+  .story-text p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+  .story-text p b { color: var(--text-hi); }
+
+  .turn-card {
+    background: var(--bg-2);
+    border: 1px solid var(--accent-line);
+    border-radius: var(--r);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    background: linear-gradient(180deg, var(--accent-wash), var(--bg-2));
+  }
+  .turn-card h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-hi);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .turn-card p {
+    font-size: 15.5px;
+    color: var(--text);
+    margin-bottom: 14px;
+    line-height: 1.65;
+  }
+  .turn-card .disc {
+    font-style: italic;
+    font-size: 13.5px;
+    color: var(--dim);
+    margin-bottom: 0;
+  }
+
+  /* Stats Counter */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 36px 0;
+  }
+  @media (max-width: 720px) { .stats-grid { grid-template-columns: 1fr; } }
+
+  .stat-card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 26px;
+    text-align: center;
+    transition: transform 0.25s;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-line);
+  }
+  .stat-num {
+    font-size: clamp(36px, 4.5vw, 48px);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--accent-ink);
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+  .stat-card:nth-child(2) .stat-num { color: var(--gold-ink); }
+  .stat-label {
+    font-size: 14.5px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* YouTube Section */
+  .yt-card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 32px;
+    padding: 44px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 36px;
+    align-items: center;
+    box-shadow: var(--shadow);
+  }
+  @media (max-width: 860px) {
+    .yt-card { grid-template-columns: 1fr; padding: 28px; gap: 28px; }
+  }
+  .yt-info p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    line-height: 1.65;
+  }
+  .yt-preview {
+    aspect-ratio: 16/9;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #1f2e24, #0f1812);
+    border: 1px solid var(--line);
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s var(--ease);
+  }
+  .yt-preview:hover { transform: scale(1.02); }
+  .yt-preview .yt-channel-badge {
+    position: absolute;
+    bottom: 14px;
+    left: 16px;
+    color: #fff;
+    font-size: 13.5px;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 5px 12px;
+    border-radius: 8px;
+  }
+  .yt-play {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #ff0000;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 28px rgba(255, 0, 0, 0.4);
+    transition: transform 0.25s var(--spring);
+  }
+  .yt-preview:hover .yt-play { transform: scale(1.12); }
+  .yt-play svg { width: 28px; height: 28px; fill: #fff; margin-left: 3px; }
+
+  /* FAQ Accordion */
+  .faq-wrap { max-width: 780px; }
+  details {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    margin-bottom: 12px;
+    padding: 18px 22px;
+    transition: border-color 0.2s;
+  }
+  details[open] { border-color: var(--accent-line); }
+  summary {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-hi);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary .faq-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--card-2);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    color: var(--accent-ink);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  details[open] summary .faq-icon { transform: rotate(45deg); }
+  details p {
+    margin-top: 14px;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.65;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+
+  /* Final CTA Banner */
+  .final-banner {
+    background: linear-gradient(135deg, var(--bg-2), var(--accent-wash));
+    border: 1px solid var(--accent-line);
+    border-radius: 36px;
+    padding: 56px 44px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .final-banner h2 { max-width: 680px; margin: 0 auto 16px; }
+  .final-banner p { font-size: 17px; color: var(--muted); max-width: 540px; margin: 0 auto 32px; }
+  .final-banner .cta-row { justify-content: center; }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 54px 0 40px;
+    font-size: 14.5px;
+    color: var(--muted);
+  }
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+  .footer-id {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-hi);
+    margin-bottom: 6px;
+  }
+  .footer-social { display: flex; flex-wrap: wrap; gap: 10px; }
+  .footer-social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .footer-social a:hover {
+    color: var(--text-hi);
+    border-color: var(--accent-line);
+    background: var(--card-2);
+    transform: translateY(-2px);
+  }
+  .footer-social a svg { width: 16px; height: 16px; fill: currentColor; }
+  .footer-disc {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.6;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap bar">
-    <a class="brand" href="#top">Lê Lộc<small>Thành Viên Độc Lập Herbalife</small></a>
-    <nav>
+<!-- Header Navigation -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <div class="brand-logo">L</div>
+      <div class="brand-text">
+        <span>Lê Lộc</span>
+        <small>Thành Viên Độc Lập Herbalife</small>
+      </div>
+    </a>
+    <nav class="nav-links">
       <a href="#hanh-trinh">Cách đồng hành</a>
       <a href="#loi-moi">Bắt đầu</a>
       <a href="#ve-loc">Câu chuyện</a>
       <a href="#youtube">YouTube</a>
       <a href="#hoi-dap">Hỏi đáp</a>
-      <button class="theme" id="theme-btn" type="button" aria-label="Đổi nền sáng tối" title="Đổi nền sáng tối">🌙</button>
-      <a class="btn small" data-chat href="#">Nhắn Lộc</a>
     </nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="theme-btn" type="button" aria-label="Đổi nền sáng tối" title="Đổi giao diện sáng/tối">
+        <span id="theme-icon">🌙</span>
+      </button>
+      <a class="btn btn-primary btn-sm" data-chat="Chào anh Lộc, em muốn tìm hiểu giải pháp sức khỏe" href="#">Nhắn Lộc</a>
+    </div>
   </div>
 </header>
 
 <main id="top">
-  <div class="hero">
+  <!-- Hero Section -->
+  <section class="hero">
     <div class="wrap hero-grid">
-      <div>
-        <span class="tag"><i></i>Nhóm Dinh Dưỡng tại Thủ Đức, TP.HCM</span>
-        <h1>Bận rộn vẫn ăn uống lành mạnh được.<em>Nếu có người đi cùng.</em></h1>
-        <p class="lead">Lộc đồng hành cùng anh chị bận rộn xây thói quen ăn uống cân bằng: có bữa ăn gợi ý, có người hỏi thăm mỗi ngày, có nhóm cùng thực hành.</p>
+      <div class="hero-content">
+        <span class="tag-pill"><i></i> Nhóm Dinh Dưỡng Thủ Đức, TP.HCM</span>
+        <h1>Bận rộn vẫn ăn uống lành mạnh được. <em>Nếu có người đi cùng.</em></h1>
+        <p class="lead">Lộc đồng hành cùng anh chị bận rộn xây thói quen ăn uống khoa học, kiểm soát cân nặng và làm chủ sức khỏe chủ động qua từng bước nhỏ vững chắc.</p>
         <div class="cta-row">
-          <a class="btn mango" data-chat href="#">Nhắn Lộc để bắt đầu</a>
-          <a class="btn ghost" href="#ve-loc">Đọc câu chuyện của Lộc</a>
+          <a class="btn btn-gold" data-chat="SỨC KHỎE" href="#">Nhắn Lộc để bắt đầu</a>
+          <a class="btn btn-ghost" href="#ve-loc">Xem câu chuyện của Lộc</a>
         </div>
-        <ul class="checks">
-          <li>Trao đổi qua tin nhắn</li>
-          <li>Đi từng bước nhỏ</li>
-          <li>Không bắt buộc kinh doanh</li>
+        <ul class="hero-checks">
+          <li>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Trao đổi qua tin nhắn
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Lộ trình cá nhân hóa
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Không bắt buộc kinh doanh
+          </li>
         </ul>
       </div>
-      <div class="portrait">
-        <div class="photo"><img src="loc.jpg" alt="Lê Lộc" width="720" height="900"></div>
-        <div class="chip c1"><i></i><div>Bữa ăn gợi ý<small>Vừa với lịch bận</small></div></div>
-        <div class="chip c2"><i></i><div>Hỏi thăm mỗi ngày<small>Có người nhắc</small></div></div>
-        <div class="chip c3"><i></i><div>Chào, em là Lộc!</div></div>
+
+      <div class="hero-visual">
+        <div class="photo-frame">
+          <img src="loc.jpg" alt="Lê Lộc - Huấn luyện viên sức khỏe" width="720" height="900">
+        </div>
+        <div class="float-badge fb-1">
+          <span class="dot"></span>
+          <div>
+            <b>Bữa ăn gợi ý</b>
+            <small>Vừa vặn lịch bận rộn</small>
+          </div>
+        </div>
+        <div class="float-badge gold fb-2">
+          <span class="dot"></span>
+          <div>
+            <b>Hỏi thăm mỗi ngày</b>
+            <small>Có người đi cùng nhắc nhở</small>
+          </div>
+        </div>
+        <div class="float-badge fb-3">
+          <span class="dot"></span>
+          <div>
+            <b>Chào bạn, mình là Lê Lộc!</b>
+            <small>HLV Sức Khỏe Chủ Động</small>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
+  <!-- Marquee Running Strip -->
   <div class="strip">
-    <p>Một cách đồng hành cho người bận</p>
     <div class="marquee" aria-hidden="true">
-      <span>Bữa ăn gợi ý</span><span>Hỏi thăm mỗi ngày</span><span>Nhóm cùng thực hành</span><span>Trao đổi qua tin nhắn</span><span>Nhóm Dinh Dưỡng Thủ Đức</span><span>Từng bước nhỏ</span><span>Ăn uống khoa học</span><span>Lối sống lành mạnh</span>
-      <span>Bữa ăn gợi ý</span><span>Hỏi thăm mỗi ngày</span><span>Nhóm cùng thực hành</span><span>Trao đổi qua tin nhắn</span><span>Nhóm Dinh Dưỡng Thủ Đức</span><span>Từng bước nhỏ</span><span>Ăn uống khoa học</span><span>Lối sống lành mạnh</span>
+      <span>Bữa ăn gợi ý khoa học</span>
+      <span>Hỏi thăm & góp ý mỗi ngày</span>
+      <span>Nhóm cùng thực hành</span>
+      <span>Trao đổi tiện lợi qua tin nhắn</span>
+      <span>Nhóm Dinh Dưỡng Thủ Đức</span>
+      <span>Đi từng bước nhỏ bền vững</span>
+      <span>Xây dựng lối sống lành mạnh</span>
+      <span>Phát triển sự nghiệp HLV</span>
+      <span>Bữa ăn gợi ý khoa học</span>
+      <span>Hỏi thăm & góp ý mỗi ngày</span>
+      <span>Nhóm cùng thực hành</span>
+      <span>Trao đổi tiện lợi qua tin nhắn</span>
+      <span>Nhóm Dinh Dưỡng Thủ Đức</span>
+      <span>Đi từng bước nhỏ bền vững</span>
+      <span>Xây dựng lối sống lành mạnh</span>
+      <span>Phát triển sự nghiệp HLV</span>
     </div>
   </div>
 
+  <!-- Nỗi đau & Đối chiếu -->
   <section>
     <div class="wrap">
-      <div class="eyebrow">Nghe quen không?</div>
-      <h2>Biết là nên ăn uống tử tế hơn. <em>Mà ngày nào cũng cuốn theo công việc.</em></h2>
-      <p class="sub">Phần lớn người tìm đến Lộc không thiếu quyết tâm. Họ thiếu một cách làm vừa với lịch bận rộn của mình.</p>
-      <div class="cards">
-        <div class="ncard"><span class="no">01</span><b>Không có thời gian</b>Sáng vội, trưa ăn tạm, tối ăn bù. Tuần nào cũng định bắt đầu lại.</div>
-        <div class="ncard"><span class="no">02</span><b>Không biết ăn sao cho đủ</b>Đọc nhiều nhưng mỗi nơi nói một kiểu, không biết áp dụng vào mâm cơm nhà mình.</div>
-        <div class="ncard"><span class="no">03</span><b>Làm được vài hôm rồi bỏ</b>Tự làm một mình thì dễ nản. Không ai nhắc, không ai xem giúp.</div>
+      <div class="eyebrow">Thực tế bạn đang gặp?</div>
+      <h2>Biết là nên ăn uống tử tế hơn. <em>Nhưng ngày nào cũng cuốn theo bận rộn.</em></h2>
+      <p class="sec-desc">Phần lớn người tìm đến Lộc không thiếu quyết tâm. Họ chỉ thiếu một phương pháp thực tế và một người đồng hành bền bỉ.</p>
+
+      <div class="bento-grid">
+        <div class="bcard">
+          <div class="bcard-no">01</div>
+          <h3>Không có thời gian</h3>
+          <p>Sáng vội vàng, trưa ăn tạm bợ, tối ăn bù trong mệt mỏi. Tuần nào cũng định bụng thứ Hai sẽ bắt đầu lại.</p>
+        </div>
+        <div class="bcard">
+          <div class="bcard-no">02</div>
+          <h3>Không biết ăn sao cho đúng</h3>
+          <p>Tìm kiếm nhiều thông tin trên mạng nhưng mỗi nơi chỉ một kiểu, hoang mang không biết áp dụng sao vào bữa ăn hàng ngày.</p>
+        </div>
+        <div class="bcard">
+          <div class="bcard-no">03</div>
+          <h3>Làm vài hôm rồi bỏ</h3>
+          <p>Tự làm một mình rất dễ nản lòng. Lúc bận rộn hay gặp tiệc tùng không có ai nhắc, không có ai gỡ khó.</p>
+        </div>
       </div>
-      <div class="compare">
-        <div class="col">
-          <h3>Tự xoay một mình</h3>
+
+      <div class="compare-box">
+        <div class="compare-col before">
+          <h4>Tự xoay xở một mình</h4>
           <ul>
-            <li>Mỗi ngày tự nghĩ hôm nay ăn gì</li>
-            <li>Đọc mỗi nơi một kiểu, không biết theo ai</li>
-            <li>Lỡ một bữa là bỏ luôn cả tuần</li>
+            <li>Mỗi ngày phải đau đầu nghĩ hôm nay ăn gì</li>
+            <li>Tham khảo thông tin chắp vá, dễ nản và nghi ngờ</li>
+            <li>Lỡ một bữa tiệc tùng là buông xuôi bỏ cuộc luôn cả tuần</li>
           </ul>
         </div>
-        <div class="col after">
-          <h3>Khi có người đi cùng</h3>
+        <div class="compare-col after">
+          <h4>Khi có người đi cùng</h4>
           <ul>
-            <li>Có bữa ăn gợi ý, làm theo được ngay</li>
-            <li>Có người xem bữa ăn và góp ý mỗi ngày</li>
-            <li>Lỡ một bữa thì hôm sau đi tiếp, có nhóm cùng thực hành</li>
+            <li>Có cấu trúc bữa ăn gợi ý rõ ràng, làm theo được ngay</li>
+            <li>Có người xem bữa ăn, động viên và góp ý nhẹ nhàng mỗi ngày</li>
+            <li>Lỡ một bữa thì bữa sau điều chỉnh tiếp, có nhóm bạn cùng chung mục tiêu</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="softbg" id="hanh-trinh">
+  <!-- Hành trình 4 bước -->
+  <section id="hanh-trinh" style="background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
     <div class="wrap">
-      <div class="eyebrow">Cách Lộc đồng hành</div>
-      <h2>Bốn chặng. <em>Đi từng bước nhỏ.</em></h2>
-      <p class="sub">Không ép, không vội. Mỗi chặng chỉ thêm một thói quen để anh chị giữ được lâu.</p>
-      <div class="steps">
-        <div class="step"><div class="num">1</div><h3>Trò chuyện</h3><p>Lộc hỏi về thói quen ăn uống, lịch làm việc và điều anh chị mong muốn.</p></div>
-        <div class="step"><div class="num">2</div><h3>Bữa ăn gợi ý</h3><p>Anh chị nhận gợi ý bữa ăn cân bằng, dễ làm theo với lịch bận rộn.</p></div>
-        <div class="step"><div class="num">3</div><h3>Hỏi thăm mỗi ngày</h3><p>Chụp bữa ăn gửi qua, Lộc xem và góp ý. Có người nhắc thì dễ giữ nhịp hơn.</p></div>
-        <div class="step"><div class="num">4</div><h3>Thành thói quen</h3><p>Khi đã quen, anh chị tự chủ động được bữa ăn của mình và của gia đình.</p></div>
+      <div class="eyebrow">Cách đồng hành</div>
+      <h2>Bốn chặng đồng hành <em>đơn giản & rõ ràng</em></h2>
+      <p class="sec-desc">Không cần thay đổi đột ngột toàn bộ cuộc sống. Chúng ta đi từng bước nhỏ để cơ thể thích nghi nhẹ nhàng.</p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>Trò chuyện</h3>
+          <p>Trao đổi qua tin nhắn về thói quen, lịch sinh hoạt và mục tiêu sức khỏe của bạn hiện tại.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>Gợi ý bữa ăn</h3>
+          <p>Thiết lập bữa ăn khoa học vừa vặn với quỹ thời gian bận rộn, không gò bó khắt khe.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>Đồng hành mỗi ngày</h3>
+          <p>Nhắn tin nhắc nhở, xem hình ảnh bữa ăn và cùng bạn tháo gỡ khó khăn từng ngày.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <h3>Duy trì bền vững</h3>
+          <p>Biến ăn uống khoa học thành phản xạ tự nhiên. Bạn tự tin duy trì vóc dáng suốt đời.</p>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Hai lời mời -->
   <section id="loi-moi">
     <div class="wrap">
-      <div class="eyebrow">Hai lời mời riêng biệt</div>
-      <h2>Anh chị chọn điều <em>phù hợp với mình.</em></h2>
-      <p class="sub">Chăm sóc sức khỏe và hợp tác kinh doanh là hai việc khác nhau. Anh chị có thể chỉ chọn một.</p>
-      <div class="two">
-        <div class="card health">
-          <div class="label">Lời mời 1</div>
-          <h3>Trải nghiệm chăm sóc dinh dưỡng</h3>
+      <div class="eyebrow">Bắt đầu cùng Lộc</div>
+      <h2>Hai lời mời tách riêng. <em>Bạn chọn điều phù hợp nhất.</em></h2>
+      <p class="sec-desc">Dù bạn chỉ muốn chăm sóc sức khỏe cho bản thân hay muốn tìm kiếm cơ hội khởi nghiệp, Lộc đều sẵn sàng chia sẻ.</p>
+
+      <div class="offers-grid">
+        <div class="offer-card highlight">
+          <div class="offer-tag">Dành cho sức khỏe cá nhân</div>
+          <h3>Trải nghiệm Ăn Uống Lành Mạnh</h3>
           <ul>
-            <li>Dành cho người muốn ăn uống lành mạnh nhưng bận rộn</li>
-            <li>Có bữa ăn gợi ý và người đồng hành hỏi thăm</li>
-            <li>Sinh hoạt cùng Nhóm Dinh Dưỡng tại Thủ Đức</li>
+            <li>Nhận gợi ý bữa ăn phù hợp với công việc và nhịp sống</li>
+            <li>Lộc xem bữa ăn và góp ý trực tiếp qua tin nhắn mỗi ngày</li>
+            <li>Tham gia nhóm giao lưu cùng các thành viên tích cực</li>
+            <li>Tùy chọn sinh hoạt tại Nhóm Dinh Dưỡng Thủ Đức</li>
           </ul>
-          <a class="btn" data-chat="SỨC KHỎE" href="#">Nhắn "SỨC KHỎE"</a>
+          <a class="btn btn-primary" data-chat="SỨC KHỎE" href="#">Nhắn Lộc: SỨC KHỎE</a>
         </div>
-        <div class="card biz">
-          <div class="label">Lời mời 2</div>
-          <h3>Tìm hiểu cơ hội hợp tác</h3>
+
+        <div class="offer-card biz">
+          <div class="offer-tag">Dành cho sự nghiệp</div>
+          <h3>Tìm hiểu Hợp Tác & Khởi Nghiệp</h3>
           <ul>
-            <li>Dành cho người thích chăm sóc người khác và sẵn sàng làm việc thật</li>
-            <li>Bắt đầu từ chính trải nghiệm sản phẩm của mình</li>
-            <li>Được hướng dẫn từng bước, học qua việc phục vụ khách</li>
+            <li>Tìm hiểu ngành chăm sóc sức khỏe chủ động nhân văn & bền vững</li>
+            <li>Được cố vấn trực tiếp quy trình và mô hình Nhóm Dinh Dưỡng</li>
+            <li>Lộ trình đào tạo bài bản từ cơ bản đến xây dựng hệ thống</li>
+            <li>Xây dựng nguồn thu nhập phát triển theo giá trị lan tỏa</li>
           </ul>
-          <a class="btn" data-chat="SỰ NGHIỆP" href="#">Nhắn "SỰ NGHIỆP"</a>
-          <p class="note">Đây không phải cơ hội làm giàu nhanh. Kết quả phụ thuộc vào thời gian, công sức và kỹ năng của mỗi người.</p>
+          <a class="btn btn-gold" data-chat="SỰ NGHIỆP" href="#">Nhắn Lộc: SỰ NGHIỆP</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="ve-loc" class="softbg">
+  <!-- Câu chuyện của Lộc -->
+  <section id="ve-loc" style="background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
     <div class="wrap">
       <div class="eyebrow">Câu chuyện của Lộc</div>
-      <h2>Em từng nghĩ cứ kiếm được tiền là ổn. <em>Cho đến khi cơ thể lên tiếng.</em></h2>
-      <div class="story-grid">
-        <div>
-          <p>Em là <b>Lê Lộc</b>. Năm 2017, em khởi nghiệp trong ngành phế liệu điện tử. Công việc ổn định, thu nhập tốt.</p>
-          <p>Nhưng càng bận, em càng bỏ bê bản thân. Cân nặng tăng dần, người thường xuyên mệt mỏi. Có những ngày em làm việc bằng cà phê và ý chí.</p>
-          <p>Lúc đó em mới hiểu: <b>sức khỏe là tài sản quan trọng nhất của một người làm kinh doanh</b>. Mất nó thì mọi thứ khác đều chậm lại.</p>
+      <h2>Mình từng nghĩ cứ kiếm được tiền là ổn. <em>Cho đến khi cơ thể lên tiếng.</em></h2>
+
+      <div class="story-layout">
+        <div class="story-text">
+          <p>Mình là <b>Lê Lộc</b>. Năm 2017, mình khởi nghiệp trong ngành phế liệu điện tử. Công việc ổn định, thu nhập tốt.</p>
+          <p>Nhưng càng bận rộn, mình càng bỏ bê bản thân. Cân nặng tăng dần, cơ thể thường xuyên mệt mỏi uể oải. Có những giai đoạn mình phải làm việc hoàn toàn bằng cà phê và ý chí gắng gượng.</p>
+          <p>Lúc đó mình mới thấm thía hiểu ra: <b>sức khỏe là tài sản quan trọng nhất của một người làm kinh doanh</b>. Mất nó thì mọi dự định sự nghiệp đều phải chậm lại.</p>
         </div>
-        <div class="turn">
-          <h3>🔑 Bước ngoặt</h3>
-          <p>Em may mắn được giới thiệu một chương trình <b>chăm sóc sức khỏe chủ động</b>. Em bắt đầu từ việc đơn giản nhất: ăn uống lại cho đúng, mỗi ngày một chút, và có người đồng hành nhắc mình.</p>
-          <p>Sau một thời gian, em <b>giảm cân</b>, cơ thể nhẹ nhàng và <b>nhiều năng lượng hơn hẳn</b>. Quan trọng hơn, em giữ được thói quen đó đến hôm nay. Từ trải nghiệm của chính mình, em chọn việc này làm sự nghiệp.</p>
-          <p class="disc">Kết quả trên không phải là điển hình, mỗi cá nhân khác nhau có kết quả khác nhau.</p>
+
+        <div class="turn-card">
+          <h3>🔑 Bước ngoặt thay đổi</h3>
+          <p>May mắn mình được biết đến chương trình <b>chăm sóc sức khỏe chủ động</b>. Mình bắt đầu từ điều giản dị nhất: ăn uống lại cho đúng, mỗi ngày một chút và có người đồng hành chỉ dẫn.</p>
+          <p>Sau một thời gian, mình <b>giảm cân</b>, cơ thể nhẹ nhõm và <b>tràn đầy năng lượng hơn hẳn</b>. Quan trọng nhất là mình duy trì được thói quen tốt đó đến tận hôm nay. Từ trải nghiệm thực tế của chính mình, mình quyết định chọn lĩnh vực này làm sự nghiệp lâu dài.</p>
+          <p class="disc">(Kết quả trên không phải là điển hình, mỗi cá nhân khác nhau có kết quả khác nhau tùy theo nỗ lực bản thân.)</p>
         </div>
       </div>
 
-      <h3 class="mt">🎯 Hiện tại em làm ba việc</h3>
-      <div class="cards">
-        <div class="ncard"><span class="no">01</span><b>Hướng dẫn ăn uống khoa học</b>Kiểm soát cân nặng và xây lối sống lành mạnh.</div>
-        <div class="ncard"><span class="no">02</span><b>Đào tạo, cố vấn</b>Cho anh chị muốn phát triển sự nghiệp trong lĩnh vực chăm sóc sức khỏe chủ động.</div>
-        <div class="ncard"><span class="no">03</span><b>Chuỗi Nhóm Dinh Dưỡng</b>Phát triển mô hình đơn giản, dễ nhân rộng.</div>
+      <div class="eyebrow" style="margin-top: 20px;">Hiện tại Lộc tập trung 3 hoạt động</div>
+      <div class="bento-grid">
+        <div class="bcard">
+          <div class="bcard-no">1</div>
+          <h3>Hướng dẫn ăn uống</h3>
+          <p>Hướng dẫn ăn uống khoa học, kiểm soát cân nặng và xây dựng lối sống lành mạnh cho hội viên.</p>
+        </div>
+        <div class="bcard">
+          <div class="bcard-no">2</div>
+          <h3>Đào tạo & cố vấn</h3>
+          <p>Đào tạo, cố vấn cho các bạn muốn phát triển sự nghiệp trong ngành sức khỏe chủ động.</p>
+        </div>
+        <div class="bcard">
+          <div class="bcard-no">3</div>
+          <h3>Chuỗi Nhóm Dinh Dưỡng</h3>
+          <p>Phát triển mô hình Nhóm Dinh Dưỡng gần gũi, đơn giản và dễ dàng nhân rộng.</p>
+        </div>
       </div>
-      <div class="stats">
-        <div><b>100+</b>hội viên em đã đồng hành</div>
-        <div><b>Gần 20</b>thành viên khởi nghiệp cùng em</div>
-        <div><b>100+</b>sự kiện sức khỏe trong và ngoài nước</div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">100+</div>
+          <div class="stat-label">Hội viên Lộc đã trực tiếp đồng hành</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">Gần 20</div>
+          <div class="stat-label">Thành viên bắt đầu khởi nghiệp cùng Lộc</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">100+</div>
+          <div class="stat-label">Sự kiện sức khỏe trong & ngoài nước</div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- YouTube Section -->
   <section id="youtube">
     <div class="wrap">
-      <div class="yt">
-        <div>
-          <div class="eyebrow">Kênh YouTube</div>
-          <h2>Xem Lộc chia sẻ <em>trên YouTube.</em></h2>
-          <p>Lộc chia sẻ về thói quen ăn uống, lối sống lành mạnh và hành trình làm nghề trên kênh @leloc2025. Anh chị ghé xem và đăng ký để theo dõi video mới.</p>
-          <a class="btn" href="https://www.youtube.com/@leloc2025" target="_blank" rel="noopener">Mở kênh @leloc2025</a>
+      <div class="yt-card">
+        <div class="yt-info">
+          <div class="eyebrow">Kênh YouTube chính thức</div>
+          <h2>Theo dõi kênh YouTube <em>@leloc2025</em></h2>
+          <p>Lộc thường xuyên chia sẻ những góc nhìn thực tế về thói quen ăn uống khoa học, cách chăm sóc sức khỏe chủ động cho người bận rộn và hành trình khởi nghiệp thực chiến. Mời anh chị ghé thăm và nhấn Đăng ký kênh nhé!</p>
+          <a class="btn btn-primary" href="https://www.youtube.com/@leloc2025" target="_blank" rel="noopener">
+            <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Ghé thăm kênh @leloc2025
+          </a>
         </div>
-        <a class="screen" href="https://www.youtube.com/@leloc2025" target="_blank" rel="noopener" aria-label="Mở kênh YouTube của Lộc"><span class="play"></span></a>
+        <a class="yt-preview" href="https://www.youtube.com/@leloc2025" target="_blank" rel="noopener" aria-label="Xem kênh YouTube Lê Lộc">
+          <div class="yt-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="yt-channel-badge">YouTube · @leloc2025</div>
+        </a>
       </div>
     </div>
   </section>
 
-  <section id="hoi-dap" style="padding-top:0">
+  <!-- FAQ Section -->
+  <section id="hoi-dap" style="background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
     <div class="wrap">
-      <div class="eyebrow">Hỏi đáp</div>
-      <h2>Vài điều anh chị hay hỏi.</h2>
-      <details><summary>Em rất bận, có theo được không?</summary><p>Được. Cách làm được thiết kế cho người bận: gợi ý bữa ăn gọn, trao đổi qua tin nhắn, không cần đến trực tiếp mỗi ngày.</p></details>
-      <details><summary>Tham gia trải nghiệm có bắt buộc kinh doanh không?</summary><p>Không. Hai lời mời tách riêng. Anh chị chỉ muốn chăm sóc sức khỏe thì chỉ cần chọn trải nghiệm.</p></details>
-      <details><summary>Sản phẩm có thay thế thuốc chữa bệnh không?</summary><p>Không. Sản phẩm là thực phẩm, không phải thuốc và không có tác dụng thay thế thuốc chữa bệnh. Nếu anh chị đang điều trị bệnh, hãy hỏi ý kiến bác sĩ trước.</p></details>
-      <details><summary>Em ở xa Thủ Đức thì sao?</summary><p>Anh chị cứ nhắn Lộc. Phần lớn việc đồng hành diễn ra qua tin nhắn nên vẫn theo được.</p></details>
+      <div class="eyebrow">Giải đáp thắc mắc</div>
+      <h2>Những câu hỏi thường gặp</h2>
+      <div class="faq-wrap">
+        <details>
+          <summary>
+            <span>Mình công việc rất bận, có theo được chương trình không?</span>
+            <span class="faq-icon">+</span>
+          </summary>
+          <p>Hoàn toàn được bạn nhé. Giải pháp được thiết kế tối ưu riêng cho người bận rộn: bữa ăn tinh gọn dễ chuẩn bị, tương tác linh hoạt qua tin nhắn mỗi ngày mà không bắt buộc phải có mặt trực tiếp.</p>
+        </details>
+        <details>
+          <summary>
+            <span>Tham gia chương trình sức khỏe có bắt buộc phải kinh doanh không?</span>
+            <span class="faq-icon">+</span>
+          </summary>
+          <p>Hoàn toàn không. Hai lời mời được Lộc tách bạch hoàn toàn. Nếu bạn chỉ muốn cải thiện vóc dáng và sức khỏe cho bản thân, bạn chỉ cần chọn trải nghiệm dinh dưỡng.</p>
+        </details>
+        <details>
+          <summary>
+            <span>Sản phẩm dinh dưỡng có thay thế thuốc chữa bệnh không?</span>
+            <span class="faq-icon">+</span>
+          </summary>
+          <p>Không. Sản phẩm là thực phẩm dinh dưỡng bổ sung, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh. Nếu bạn đang trong quá trình điều trị y tế, hãy luôn tham khảo ý kiến bác sĩ.</p>
+        </details>
+        <details>
+          <summary>
+            <span>Mình ở xa Thủ Đức hoặc ở tỉnh khác thì có tham gia được không?</span>
+            <span class="faq-icon">+</span>
+          </summary>
+          <p>Bạn hoàn toàn tham gia được. Quá trình hướng dẫn và đồng hành của Lộc diễn ra hàng ngày qua tin nhắn và cuộc gọi online, bạn ở bất cứ đâu cũng nhận được sự hỗ trợ sát sao.</p>
+        </details>
+      </div>
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <!-- Final CTA Banner -->
+  <section>
     <div class="wrap">
-      <div class="final">
-        <h2>Bắt đầu bằng một tin nhắn.</h2>
-        <p>Anh chị kể Lộc nghe một ngày ăn uống của mình. Từ đó mình cùng tìm bước đầu tiên phù hợp.</p>
+      <div class="final-banner">
+        <h2>Bắt đầu hành trình bằng một tin nhắn nhỏ</h2>
+        <p>Kể cho Lộc nghe một ngày ăn uống và lịch làm việc của bạn. Chúng mình sẽ cùng nhau tìm bước đi đầu tiên phù hợp nhất.</p>
         <div class="cta-row">
-          <a class="btn mango" data-chat href="#">Nhắn Lộc qua Messenger</a>
-          <a class="btn ghost" id="zalo-btn" style="display:none" href="#">Nhắn qua Zalo</a>
+          <a class="btn btn-gold" data-chat="Chào anh Lộc, em muốn bắt đầu" href="#">Nhắn Lộc qua Messenger</a>
+          <a class="btn btn-ghost" id="zalo-btn" style="display: none;" href="#">Nhắn qua Zalo</a>
         </div>
       </div>
     </div>
   </section>
 </main>
 
+<!-- Footer -->
 <footer>
   <div class="wrap">
-    <div class="id">Lê Lộc - Thành Viên Độc Lập Herbalife</div>
-    <p>Thủ Đức, TP. Hồ Chí Minh</p>
-    <div class="social">
-      <a href="https://www.facebook.com/leloc2007" target="_blank" rel="noopener">Facebook</a>
-      <a href="https://www.youtube.com/@leloc2025" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://github.com/Leloc2007" target="_blank" rel="noopener">GitHub</a>
-      <a id="zalo-foot" style="display:none" href="#">Zalo</a>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-id">Lê Lộc · Thành Viên Độc Lập Herbalife</div>
+        <p>Khu vực hoạt động: Thủ Đức, TP. Hồ Chí Minh & Hỗ trợ toàn quốc</p>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/leloc2007" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <a href="https://www.youtube.com/@leloc2025" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube @leloc2025
+        </a>
+        <a href="https://github.com/Leloc2007" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub leloc2007
+        </a>
+        <a id="zalo-foot" style="display: none;" href="#">
+          Zalo: 0909306609
+        </a>
+      </div>
     </div>
-    <p class="disc">Đây là trang cá nhân của một Thành Viên Độc Lập Herbalife, không phải trang chính thức của Công ty Herbalife Việt Nam. Sản phẩm không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh. Kết quả của mỗi người khác nhau. Thông tin trên trang chỉ để tham khảo, không thay cho tư vấn y tế.</p>
+    <p class="footer-disc">Đây là website cá nhân của một Thành Viên Độc Lập Herbalife, không phải trang chính thức của Tập đoàn hay Công ty TNHH MTV Herbalife Việt Nam. Sản phẩm dinh dưỡng không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh. Kết quả của mỗi cá nhân là khác nhau tùy theo mức độ nỗ lực và tuân thủ lối sống.</p>
   </div>
 </footer>
 
 <script>
-  // === CẤU HÌNH LIÊN HỆ: chỉ cần sửa 2 dòng dưới ===
-  var MESSENGER = "https://m.me/leloc2007";   // tên Facebook của Lộc
-  var ZALO_PHONE = "0909306609";              // để trống thì ẩn nút Zalo
+  // Cấu hình liên lạc
+  var MESSENGER = "https://m.me/leloc2007";
+  var ZALO_PHONE = "0909306609";
 
+  // Nối link Messenger
   document.querySelectorAll("[data-chat]").forEach(function (a) {
-    var text = a.getAttribute("data-chat");
-    a.href = MESSENGER + (text ? "?text=" + encodeURIComponent(text) : "");
-    a.target = "_blank"; a.rel = "noopener";
+    var txt = a.getAttribute("data-chat");
+    a.href = MESSENGER + (txt ? "?text=" + encodeURIComponent(txt) : "");
+    a.target = "_blank";
+    a.rel = "noopener";
   });
+
+  // Nối link Zalo
   if (ZALO_PHONE) {
     ["zalo-btn", "zalo-foot"].forEach(function (id) {
-      var z = document.getElementById(id);
-      z.href = "https://zalo.me/" + ZALO_PHONE; z.target = "_blank"; z.rel = "noopener"; z.style.display = "inline-block";
+      var el = document.getElementById(id);
+      if (el) {
+        el.href = "https://zalo.me/" + ZALO_PHONE;
+        el.target = "_blank";
+        el.rel = "noopener";
+        el.style.display = "inline-flex";
+      }
     });
   }
 
-  // Nút đổi nền sáng tối (lựa chọn giữ trong phiên xem này; lần sau lại theo giờ của người đọc)
-  var root = document.documentElement, tb = document.getElementById("theme-btn");
-  function paint() { tb.textContent = root.getAttribute("data-theme") === "dark" ? "☀️" : "🌙"; }
-  paint();
-  tb.addEventListener("click", function () {
-    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  // Điều khiển giao diện Sáng / Tối
+  var root = document.documentElement;
+  var themeBtn = document.getElementById("theme-btn");
+  var themeIcon = document.getElementById("theme-icon");
+
+  function updateThemeIcon() {
+    var current = root.getAttribute("data-theme");
+    themeIcon.textContent = current === "dark" ? "☀️" : "🌙";
+  }
+  updateThemeIcon();
+
+  themeBtn.addEventListener("click", function () {
+    var cur = root.getAttribute("data-theme");
+    var next = cur === "dark" ? "light" : "dark";
     root.setAttribute("data-theme", next);
-    try { sessionStorage.setItem("theme", next); } catch (e) {}
-    paint();
+    try {
+      localStorage.setItem("loc-theme", next);
+      sessionStorage.setItem("theme", next);
+    } catch (e) {}
+    updateThemeIcon();
   });
 </script>
+
 </body>
 </html>
