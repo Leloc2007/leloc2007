@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lê Lộc - Đồng hành ăn uống lành mạnh | Thành Viên Độc Lập Herbalife</title>
+<meta name="description" content="Lộc đồng hành cùng người bận rộn xây thói quen ăn uống lành mạnh tại Nhóm Dinh Dưỡng ở Thủ Đức. Trang cá nhân của Thành Viên Độc Lập Herbalife.">
+<meta property="og:title" content="Lê Lộc - Đồng hành ăn uống lành mạnh">
+<meta property="og:description" content="Bận rộn vẫn ăn uống lành mạnh được. Nhắn Lộc để bắt đầu.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,700;1,200&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --garden:#266431; --rosemary:#3A5137; --bay:#224945; --night:#101820;
+    --mango:#EFAC29; --sunflower:#FFF176; --rain:#DDFCFF; --white:#FFFFFF;
+    --soft:#F4F8F4; --line:#DCE7DD;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Noto Sans",system-ui,sans-serif;color:var(--night);background:var(--white);line-height:1.65;font-size:17px}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* Thanh trên */
+  header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-weight:700;color:var(--garden);text-decoration:none;font-size:19px}
+  .brand small{display:block;font-weight:400;font-size:12px;color:var(--rosemary);letter-spacing:.3px}
+  nav a{margin-left:22px;text-decoration:none;font-weight:500;font-size:15px;color:var(--rosemary)}
+  nav a:hover{color:var(--garden)}
+  @media(max-width:720px){nav a:not(.btn){display:none}}
+
+  .btn{display:inline-block;background:var(--garden);color:#fff!important;padding:13px 26px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px;transition:transform .15s, box-shadow .15s;border:2px solid var(--garden)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(38,100,49,.25)}
+  .btn.ghost{background:transparent;color:var(--garden)!important}
+  .btn.mango{background:var(--mango);border-color:var(--mango);color:var(--night)!important}
+  .btn.small{padding:9px 18px;font-size:14px}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;background:var(--garden);color:#fff;padding:84px 0 110px}
+  .hero::before,.hero::after{content:"";position:absolute;background:rgba(255,255,255,.07);border-radius:62% 38% 55% 45% / 48% 60% 40% 52%}
+  .hero::before{width:520px;height:520px;right:-140px;top:-120px}
+  .hero::after{width:300px;height:300px;right:160px;bottom:-170px;background:rgba(239,172,41,.16)}
+  .hero .wrap{position:relative;z-index:1}
+  .tag{display:inline-block;background:rgba(255,255,255,.14);padding:6px 16px;border-radius:999px;font-size:14px;font-weight:500;margin-bottom:22px}
+  h1{font-size:clamp(36px,6.4vw,66px);line-height:1.1;font-weight:700;max-width:13.5em;letter-spacing:-.5px}
+  h1 em{font-style:normal;color:var(--sunflower)}
+  .hero p.lead{font-size:clamp(17px,2.2vw,21px);max-width:34em;margin:24px 0 34px;opacity:.95}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px}
+  .hero .btn.ghost{border-color:#fff;color:#fff!important}
+
+  section{padding:80px 0}
+  .eyebrow{color:var(--garden);font-weight:700;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+  h2{font-size:clamp(28px,4vw,42px);line-height:1.2;max-width:17em;margin-bottom:18px;letter-spacing:-.3px}
+  .sub{max-width:38em;color:#3b4a3d;margin-bottom:40px}
+
+  /* Nỗi đau */
+  .pains{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+  .pain{background:var(--soft);border-radius:22px;padding:26px;border:1px solid var(--line)}
+  .pain b{display:block;font-size:19px;margin-bottom:6px;color:var(--bay)}
+  .pain span{font-size:28px;display:block;margin-bottom:10px}
+
+  /* Hành trình */
+  .journey{background:var(--soft)}
+  .steps{position:relative;max-width:760px}
+  .steps::before{content:"";position:absolute;left:27px;top:10px;bottom:60px;border-left:3px dashed var(--garden);opacity:.45}
+  .step{position:relative;display:flex;gap:22px;margin-bottom:30px}
+  .num{flex:0 0 56px;height:56px;border-radius:50%;background:var(--garden);color:#fff;font-weight:700;font-size:22px;display:grid;place-items:center;position:relative;z-index:1;box-shadow:0 0 0 6px var(--soft)}
+  .step:last-child .num{background:var(--mango);color:var(--night)}
+  .step h3{font-size:21px;margin-bottom:4px;color:var(--bay)}
+  .step p{color:#3b4a3d}
+
+  /* Hai lời mời */
+  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+  .card{border-radius:28px;padding:36px 32px;display:flex;flex-direction:column}
+  .card.health{background:var(--garden);color:#fff}
+  .card.biz{background:#fff;border:2px solid var(--garden)}
+  .card .label{font-size:13px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;opacity:.85;margin-bottom:10px}
+  .card h3{font-size:28px;line-height:1.2;margin-bottom:14px}
+  .card ul{list-style:none;margin:6px 0 28px}
+  .card li{padding-left:28px;position:relative;margin-bottom:10px}
+  .card li::before{content:"";position:absolute;left:4px;top:10px;width:10px;height:10px;border-radius:50% 0 50% 50%;background:var(--mango);transform:rotate(45deg)}
+  .card .btn{margin-top:auto;align-self:flex-start}
+  .card.health .btn{background:#fff;border-color:#fff;color:var(--garden)!important}
+  .note{font-size:14px;margin-top:16px;opacity:.85}
+
+  /* Về Lộc */
+  .about{display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:44px;align-items:center}
+  @media(max-width:760px){.about{grid-template-columns:1fr}}
+  .photo{aspect-ratio:4/5;border-radius:46% 54% 42% 58% / 52% 44% 56% 48%;background:linear-gradient(150deg,var(--garden),var(--bay));display:grid;place-items:center;color:#fff;font-size:90px;font-weight:700;overflow:hidden}
+  .photo img{width:100%;height:100%;object-fit:cover}
+  .about p{margin-bottom:14px;color:#2f3d31}
+
+  /* Hỏi đáp */
+  details{border-bottom:1px solid var(--line);padding:18px 0;max-width:780px}
+  summary{font-weight:700;font-size:18px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--bay)}
+  summary::after{content:"+";color:var(--garden);font-size:24px;line-height:1}
+  details[open] summary::after{content:"-"}
+  details p{margin-top:10px;color:#3b4a3d}
+
+  /* Kết */
+  .final{background:var(--bay);color:#fff;text-align:left;border-radius:36px;padding:56px 44px;position:relative;overflow:hidden}
+  .final::after{content:"";position:absolute;width:320px;height:320px;right:-90px;bottom:-130px;background:rgba(239,172,41,.2);border-radius:60% 40% 50% 50%}
+  .final h2{color:#fff;position:relative;z-index:1}
+  .final p{max-width:34em;margin-bottom:28px;opacity:.92;position:relative;z-index:1}
+  .final .cta-row{position:relative;z-index:1}
+
+  footer{padding:44px 0 56px;font-size:14px;color:#4a5a4c}
+  footer .id{font-weight:700;color:var(--garden);font-size:16px;margin-bottom:10px}
+  footer .disc{font-style:italic;font-weight:200;color:#3b4a3d;max-width:60em;margin-top:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top">Lê Lộc<small>Thành Viên Độc Lập Herbalife</small></a>
+    <nav>
+      <a href="#hanh-trinh">Cách đồng hành</a>
+      <a href="#loi-moi">Bắt đầu</a>
+      <a href="#ve-loc">Về Lộc</a>
+      <a href="#hoi-dap">Hỏi đáp</a>
+      <a class="btn small" data-chat href="#">Nhắn Lộc</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <span class="tag">Nhóm Dinh Dưỡng tại Thủ Đức, TP.HCM</span>
+      <h1>Bận rộn vẫn <em>ăn uống lành mạnh</em> được, nếu có người đi cùng.</h1>
+      <p class="lead">Lộc đồng hành cùng anh chị bận rộn xây thói quen ăn uống cân bằng: có bữa ăn gợi ý, có người hỏi thăm mỗi ngày, có nhóm cùng thực hành.</p>
+      <div class="cta-row">
+        <a class="btn mango" data-chat href="#">Nhắn Lộc để bắt đầu</a>
+        <a class="btn ghost" href="#loi-moi">Xem hai cách tham gia</a>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">Có phải anh chị đang như vậy</div>
+      <h2>Biết là nên ăn uống tử tế hơn, mà ngày nào cũng cuốn theo công việc.</h2>
+      <p class="sub">Phần lớn người tìm đến Lộc không thiếu quyết tâm. Họ thiếu một cách làm vừa với lịch bận rộn của mình.</p>
+      <div class="pains">
+        <div class="pain"><span>⏰</span><b>Không có thời gian</b>Sáng vội, trưa ăn tạm, tối ăn bù. Tuần nào cũng định bắt đầu lại.</div>
+        <div class="pain"><span>🥗</span><b>Không biết ăn sao cho đủ</b>Đọc nhiều nhưng mỗi nơi nói một kiểu, không biết áp dụng vào mâm cơm nhà mình.</div>
+        <div class="pain"><span>🔁</span><b>Làm được vài hôm rồi bỏ</b>Tự làm một mình thì dễ nản. Không ai nhắc, không ai xem giúp.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="journey" id="hanh-trinh">
+    <div class="wrap">
+      <div class="eyebrow">Cách Lộc đồng hành</div>
+      <h2>Bốn chặng, đi từng bước nhỏ.</h2>
+      <p class="sub">Không ép, không vội. Mỗi chặng chỉ thêm một thói quen để anh chị giữ được lâu.</p>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><div><h3>Trò chuyện</h3><p>Lộc hỏi về thói quen ăn uống, lịch làm việc và điều anh chị mong muốn.</p></div></div>
+        <div class="step"><div class="num">2</div><div><h3>Bữa ăn gợi ý</h3><p>Anh chị nhận gợi ý bữa ăn cân bằng, dễ làm theo với lịch bận rộn.</p></div></div>
+        <div class="step"><div class="num">3</div><div><h3>Hỏi thăm mỗi ngày</h3><p>Chụp bữa ăn gửi qua, Lộc xem và góp ý. Có người nhắc thì dễ giữ nhịp hơn.</p></div></div>
+        <div class="step"><div class="num">4</div><div><h3>Thành thói quen</h3><p>Khi đã quen, anh chị tự chủ động được bữa ăn của mình và của gia đình.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="loi-moi">
+    <div class="wrap">
+      <div class="eyebrow">Hai lời mời riêng biệt</div>
+      <h2>Anh chị chọn điều phù hợp với mình.</h2>
+      <p class="sub">Chăm sóc sức khỏe và hợp tác kinh doanh là hai việc khác nhau. Anh chị có thể chỉ chọn một.</p>
+      <div class="two">
+        <div class="card health">
+          <div class="label">Lời mời 1</div>
+          <h3>Trải nghiệm chăm sóc dinh dưỡng</h3>
+          <ul>
+            <li>Dành cho người muốn ăn uống lành mạnh nhưng bận rộn</li>
+            <li>Có bữa ăn gợi ý và người đồng hành hỏi thăm</li>
+            <li>Sinh hoạt cùng Nhóm Dinh Dưỡng tại Thủ Đức</li>
+          </ul>
+          <a class="btn" data-chat="Chào Lộc, mình muốn tìm hiểu trải nghiệm chăm sóc dinh dưỡng." href="#">Nhắn "TRẢI NGHIỆM"</a>
+        </div>
+        <div class="card biz">
+          <div class="label" style="color:var(--garden)">Lời mời 2</div>
+          <h3>Tìm hiểu cơ hội hợp tác</h3>
+          <ul>
+            <li>Dành cho người thích chăm sóc người khác và sẵn sàng làm việc thật</li>
+            <li>Bắt đầu từ chính trải nghiệm sản phẩm của mình</li>
+            <li>Được hướng dẫn từng bước, học qua việc phục vụ khách</li>
+          </ul>
+          <a class="btn" data-chat="Chào Lộc, mình muốn tìm hiểu cơ hội hợp tác." href="#">Nhắn "HỢP TÁC"</a>
+          <p class="note">Đây không phải cơ hội làm giàu nhanh. Kết quả phụ thuộc vào thời gian, công sức và kỹ năng của mỗi người.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ve-loc" style="background:var(--soft)">
+    <div class="wrap about">
+      <!-- ẢNH: đặt ảnh chân dung vào thư mục này với tên loc.jpg rồi đổi chữ L thành <img src="loc.jpg" alt="Lê Lộc"> -->
+      <div class="photo">L</div>
+      <div>
+        <div class="eyebrow">Về Lộc</div>
+        <h2>Chào anh chị, em là Lộc.</h2>
+        <p>Em là Thành Viên Độc Lập Herbalife, làm việc tại Thủ Đức, TP.HCM. Công việc hằng ngày của em là kết nối, chăm sóc và đồng hành cùng anh chị trong Nhóm Dinh Dưỡng.</p>
+        <!-- CÂU CHUYỆN: thay đoạn dưới bằng câu chuyện thật của Lộc (vì sao biết đến và chọn công việc này) -->
+        <p>Em tin thói quen tốt đến từ những bước nhỏ làm đều mỗi ngày, và ai cũng dễ làm hơn khi có người đi cùng.</p>
+        <a class="btn" href="https://www.facebook.com/leloc2007" target="_blank" rel="noopener">Xem Facebook của Lộc</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="hoi-dap">
+    <div class="wrap">
+      <div class="eyebrow">Hỏi đáp</div>
+      <h2>Vài điều anh chị hay hỏi.</h2>
+      <details><summary>Em rất bận, có theo được không?</summary><p>Được. Cách làm được thiết kế cho người bận: gợi ý bữa ăn gọn, trao đổi qua tin nhắn, không cần đến trực tiếp mỗi ngày.</p></details>
+      <details><summary>Tham gia trải nghiệm có bắt buộc kinh doanh không?</summary><p>Không. Hai lời mời tách riêng. Anh chị chỉ muốn chăm sóc sức khỏe thì chỉ cần chọn trải nghiệm.</p></details>
+      <details><summary>Sản phẩm có thay thế thuốc chữa bệnh không?</summary><p>Không. Sản phẩm là thực phẩm, không phải thuốc và không có tác dụng thay thế thuốc chữa bệnh. Nếu anh chị đang điều trị bệnh, hãy hỏi ý kiến bác sĩ trước.</p></details>
+      <details><summary>Em ở xa Thủ Đức thì sao?</summary><p>Anh chị cứ nhắn Lộc. Phần lớn việc đồng hành diễn ra qua tin nhắn nên vẫn theo được.</p></details>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="final">
+        <h2>Bắt đầu bằng một tin nhắn.</h2>
+        <p>Anh chị kể Lộc nghe một ngày ăn uống của mình. Từ đó mình cùng tìm bước đầu tiên phù hợp.</p>
+        <div class="cta-row">
+          <a class="btn mango" data-chat href="#">Nhắn Lộc qua Messenger</a>
+          <a class="btn ghost" id="zalo-btn" style="border-color:#fff;color:#fff!important;display:none" href="#">Nhắn qua Zalo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="id">Lê Lộc - Thành Viên Độc Lập Herbalife</div>
+    <p>Thủ Đức, TP. Hồ Chí Minh</p>
+    <p class="disc">Đây là trang cá nhân của một Thành Viên Độc Lập Herbalife, không phải trang chính thức của Công ty Herbalife Việt Nam. Sản phẩm không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh. Kết quả của mỗi người khác nhau. Thông tin trên trang chỉ để tham khảo, không thay cho tư vấn y tế.</p>
+  </div>
+</footer>
+
+<script>
+  // === CẤU HÌNH LIÊN HỆ: chỉ cần sửa 2 dòng dưới ===
+  var MESSENGER = "https://m.me/leloc2007";   // tên Facebook của Lộc
+  var ZALO_PHONE = "";                        // điền số Zalo, vd "0901234567"; để trống thì ẩn nút Zalo
+
+  document.querySelectorAll("[data-chat]").forEach(function (a) {
+    var text = a.getAttribute("data-chat");
+    a.href = MESSENGER + (text ? "?text=" + encodeURIComponent(text) : "");
+    a.target = "_blank"; a.rel = "noopener";
+  });
+  if (ZALO_PHONE) {
+    var z = document.getElementById("zalo-btn");
+    z.href = "https://zalo.me/" + ZALO_PHONE; z.target = "_blank"; z.style.display = "inline-block";
+  }
+</script>
+</body>
+</html>
