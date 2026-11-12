@@ -94,6 +94,17 @@
   .photo img{width:100%;height:100%;object-fit:cover}
   .about p{margin-bottom:14px;color:#2f3d31}
 
+  .story{margin-top:44px}
+  .turn{background:#fff;border-radius:26px;padding:32px;border:1px solid var(--line);max-width:820px}
+  .turn h3,.story h3{font-size:24px;color:var(--bay);margin-bottom:12px}
+  .turn p{margin-bottom:12px;color:#2f3d31}
+  .turn .disc{font-style:italic;font-weight:200;font-size:15px;margin-bottom:0}
+  .story .mt{margin-top:44px;margin-bottom:18px}
+  .pain.white{background:#fff}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin:32px 0}
+  .stats div{background:var(--garden);color:#fff;border-radius:22px;padding:24px;font-size:15px}
+  .stats b{display:block;font-size:38px;line-height:1.1;color:var(--sunflower);margin-bottom:6px}
+
   /* Hỏi đáp */
   details{border-bottom:1px solid var(--line);padding:18px 0;max-width:780px}
   summary{font-weight:700;font-size:18px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--bay)}
@@ -121,7 +132,7 @@
     <nav>
       <a href="#hanh-trinh">Cách đồng hành</a>
       <a href="#loi-moi">Bắt đầu</a>
-      <a href="#ve-loc">Về Lộc</a>
+      <a href="#ve-loc">Câu chuyện</a>
       <a href="#hoi-dap">Hỏi đáp</a>
       <a class="btn small" data-chat href="#">Nhắn Lộc</a>
     </nav>
@@ -182,7 +193,7 @@
             <li>Có bữa ăn gợi ý và người đồng hành hỏi thăm</li>
             <li>Sinh hoạt cùng Nhóm Dinh Dưỡng tại Thủ Đức</li>
           </ul>
-          <a class="btn" data-chat="Chào Lộc, mình muốn tìm hiểu trải nghiệm chăm sóc dinh dưỡng." href="#">Nhắn "TRẢI NGHIỆM"</a>
+          <a class="btn" data-chat="SỨC KHỎE" href="#">Nhắn "SỨC KHỎE"</a>
         </div>
         <div class="card biz">
           <div class="label" style="color:var(--garden)">Lời mời 2</div>
@@ -192,7 +203,7 @@
             <li>Bắt đầu từ chính trải nghiệm sản phẩm của mình</li>
             <li>Được hướng dẫn từng bước, học qua việc phục vụ khách</li>
           </ul>
-          <a class="btn" data-chat="Chào Lộc, mình muốn tìm hiểu cơ hội hợp tác." href="#">Nhắn "HỢP TÁC"</a>
+          <a class="btn" data-chat="SỰ NGHIỆP" href="#">Nhắn "SỰ NGHIỆP"</a>
           <p class="note">Đây không phải cơ hội làm giàu nhanh. Kết quả phụ thuộc vào thời gian, công sức và kỹ năng của mỗi người.</p>
         </div>
       </div>
@@ -201,16 +212,34 @@
 
   <section id="ve-loc" style="background:var(--soft)">
     <div class="wrap about">
-      <!-- ẢNH: đặt ảnh chân dung vào thư mục này với tên loc.jpg rồi đổi chữ L thành <img src="loc.jpg" alt="Lê Lộc"> -->
       <div class="photo"><img src="loc.jpg" alt="Lê Lộc" width="720" height="900"></div>
       <div>
-        <div class="eyebrow">Về Lộc</div>
-        <h2>Chào anh chị, em là Lộc.</h2>
-        <p>Em là Thành Viên Độc Lập Herbalife, làm việc tại Thủ Đức, TP.HCM. Công việc hằng ngày của em là kết nối, chăm sóc và đồng hành cùng anh chị trong Nhóm Dinh Dưỡng.</p>
-        <!-- CÂU CHUYỆN: thay đoạn dưới bằng câu chuyện thật của Lộc (vì sao biết đến và chọn công việc này) -->
-        <p>Em tin thói quen tốt đến từ những bước nhỏ làm đều mỗi ngày, và ai cũng dễ làm hơn khi có người đi cùng.</p>
-        <a class="btn" href="https://www.facebook.com/leloc2007" target="_blank" rel="noopener">Xem Facebook của Lộc</a>
+        <div class="eyebrow">Câu chuyện của Lộc</div>
+        <h2>Em từng nghĩ cứ kiếm được tiền là ổn. Cho đến khi cơ thể lên tiếng.</h2>
+        <p>👋 Em là <b>Lê Lộc</b>. Năm 2017, em khởi nghiệp trong ngành phế liệu điện tử. Công việc ổn định, thu nhập tốt.</p>
+        <p>Nhưng càng bận, em càng bỏ bê bản thân. Cân nặng tăng dần, người thường xuyên mệt mỏi. Có những ngày em làm việc bằng cà phê và ý chí.</p>
+        <p>Lúc đó em mới hiểu: <b>sức khỏe là tài sản quan trọng nhất của một người làm kinh doanh</b>.</p>
       </div>
+    </div>
+    <div class="wrap story">
+      <div class="turn">
+        <h3>🔑 Bước ngoặt</h3>
+        <p>Em may mắn được giới thiệu một chương trình <b>chăm sóc sức khỏe chủ động</b>. Em bắt đầu từ việc đơn giản nhất: ăn uống lại cho đúng, mỗi ngày một chút, và có người đồng hành nhắc mình.</p>
+        <p>Sau một thời gian, em <b>giảm cân</b>, cơ thể nhẹ nhàng và <b>nhiều năng lượng hơn hẳn</b>. Quan trọng hơn, em giữ được thói quen đó đến hôm nay. Từ trải nghiệm của chính mình, em chọn việc này làm sự nghiệp.</p>
+        <p class="disc">Kết quả trên không phải là điển hình, mỗi cá nhân khác nhau có kết quả khác nhau.</p>
+      </div>
+      <h3 class="mt">🎯 Hiện tại em làm ba việc</h3>
+      <div class="pains">
+        <div class="pain white"><span>🥗</span><b>Hướng dẫn ăn uống khoa học</b>Kiểm soát cân nặng và xây lối sống lành mạnh.</div>
+        <div class="pain white"><span>🎓</span><b>Đào tạo, cố vấn</b>Cho anh chị muốn phát triển sự nghiệp trong lĩnh vực chăm sóc sức khỏe chủ động.</div>
+        <div class="pain white"><span>🌱</span><b>Chuỗi Nhóm Dinh Dưỡng</b>Phát triển mô hình đơn giản, dễ nhân rộng.</div>
+      </div>
+      <div class="stats">
+        <div><b>100+</b>hội viên em đã đồng hành</div>
+        <div><b>Gần 20</b>thành viên khởi nghiệp cùng em</div>
+        <div><b>100+</b>sự kiện sức khỏe trong và ngoài nước</div>
+      </div>
+      <a class="btn" href="https://www.facebook.com/leloc2007" target="_blank" rel="noopener">Xem Facebook của Lộc</a>
     </div>
   </section>
 
