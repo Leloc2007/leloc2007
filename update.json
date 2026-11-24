@@ -1,0 +1,29 @@
+{
+  "version": "1.2",
+  "files": [
+    {
+      "path": "controller/controller.ps1",
+      "sha256": "f16d3ac558fbcd5827b6ba9c776df25aa846262eb516d7655c7084d5b812f696"
+    },
+    {
+      "path": "controller/dashboard.html",
+      "sha256": "d2955d34395234fc9a1ee52127711966fba69257b51998cb4e7fe2b9b7614844"
+    },
+    {
+      "path": "agent/agent.ps1",
+      "sha256": "504bb2b6f2a7b66d09392b116eef534fc2dc4b5d50fe4737da46f9973719c2dd"
+    },
+    {
+      "path": "agent/notify.ps1",
+      "sha256": "8833e99a898cdbcfb573b8c2accc704c7d29d1b15589f9c0852065457ca3b956"
+    },
+    {
+      "path": "agent/setup.ps1",
+      "sha256": "34aa1528c1e0ad29184af8f16b26409fff139437c1abc783565df8b5d82c5ab5"
+    },
+    {
+      "path": "agent/uninstall.ps1",
+      "sha256": "1236eb47f6110748bf1a43c98771e7a207dbc3e58056c7b5281d12416b0a3b27"
+    }
+  ]
+}
