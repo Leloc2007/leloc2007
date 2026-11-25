@@ -1,9 +1,9 @@
 {
-  "version": "1.2",
+  "version": "1.2.1",
   "files": [
     {
       "path": "controller/controller.ps1",
-      "sha256": "f16d3ac558fbcd5827b6ba9c776df25aa846262eb516d7655c7084d5b812f696"
+      "sha256": "687c62398501f61faf0a8124322c196411284c294ec73edec4857603bd850485"
     },
     {
       "path": "controller/dashboard.html",
@@ -11,7 +11,7 @@
     },
     {
       "path": "agent/agent.ps1",
-      "sha256": "504bb2b6f2a7b66d09392b116eef534fc2dc4b5d50fe4737da46f9973719c2dd"
+      "sha256": "c3f26e26dd35d8d3624462dc5850d29ce7f51062e4ab04519e5d1b4824fc23b0"
     },
     {
       "path": "agent/notify.ps1",

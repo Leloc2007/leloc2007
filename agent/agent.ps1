@@ -19,7 +19,7 @@ param(
     [string]$Dir = "$env:ProgramData\KidGuard"
 )
 $ErrorActionPreference = 'Stop'
-$Version = '1.2'
+$Version = '1.2.1'
 $ConfigFile = Join-Path $Dir 'agent.json'
 $CacheFile = Join-Path $Dir 'cache.json'
 $LogFile = Join-Path $Dir 'agent.log'
@@ -32,6 +32,7 @@ $SafeDns = @('1.1.1.3', '1.0.0.3', '2606:4700:4700::1113', '2606:4700:4700::1003
 $BlockRanges = @('1.0.0.0-9.255.255.255', '11.0.0.0-172.15.255.255', '172.32.0.0-192.167.255.255', '192.169.0.0-223.255.255.255', '2000::-3fff:ffff:ffff:ffff:ffff:ffff:ffff:ffff')
 $HostsBegin = '# >>> KidGuard BEGIN - khong sua phan nay'
 $HostsEnd = '# <<< KidGuard END'
+$SubHosts = @('www', 'm', 'mobile', 'web', 'app', 'play', 'api', 'id', 'login', 'accounts', 'auth', 'dashboard', 'static', 'cdn', 'media', 'assets', 'games')
 
 # ---------- chống lách ----------
 # Trang tải trình duyệt có VPN / Tor và phần mềm VPN phổ biến (file hosts không chặn tên miền con, nên liệt kê cụ thể).
@@ -144,7 +145,8 @@ function Set-BlockedSites($domains) {
     $lines = New-Object System.Collections.Generic.List[string]
     foreach ($d in @($domains)) {
         if ([string]$d -notmatch '^([a-z0-9-]+\.)+[a-z]{2,}$') { continue }
-        foreach ($h in @($d, "www.$d")) { $lines.Add("0.0.0.0 $h"); $lines.Add(":: $h") }
+        # file hosts không chặn được tên miền con, nên thêm các tên miền con hay gặp (play., app., m.…)
+        foreach ($h in @($d) + @($SubHosts | ForEach-Object { "$_.$d" })) { $lines.Add("0.0.0.0 $h"); $lines.Add(":: $h") }
     }
     $current = ''
     if (Test-Path $HostsFile) { $current = [IO.File]::ReadAllText($HostsFile) }
@@ -159,6 +161,33 @@ function Set-BlockedSites($domains) {
         Clear-DnsClientCache
         Write-Log "Đã cập nhật danh sách chặn: $(@($domains) -join ', ')"
     }
+}
+
+# Chặn trong trình duyệt: chặn cả tên miền chính lẫn MỌI tên miền con (vd blooket.com chặn luôn play.blooket.com)
+function Set-RegList([string]$path, [string[]]$values) {
+    $cur = @()
+    if (Test-Path $path) {
+        $item = Get-Item $path
+        $cur = @($item.GetValueNames() | Where-Object { $_ -match '^\d+$' } | Sort-Object { [int]$_ } | ForEach-Object { [string]$item.GetValue($_) })
+    }
+    if (($cur -join "`n") -eq ($values -join "`n")) { return $false }
+    if ($DryRun) { Write-Log "[thử] Chính sách $path : $($values.Count) mục"; return $false }
+    if (Test-Path $path) { Remove-Item $path -Recurse -Force }
+    if ($values.Count) {
+        New-Item -Path $path -Force | Out-Null
+        for ($i = 0; $i -lt $values.Count; $i++) { New-ItemProperty -Path $path -Name ($i + 1) -Value $values[$i] -PropertyType String -Force | Out-Null }
+    }
+    return $true
+}
+function Set-BrowserBlocklist($domains) {
+    $ds = @($domains | Where-Object { [string]$_ -match '^([a-z0-9-]+\.)+[a-z]{2,}$' } | Select-Object -Unique)
+    $changed = $false
+    foreach ($b in 'HKLM:\SOFTWARE\Policies\Google\Chrome', 'HKLM:\SOFTWARE\Policies\Microsoft\Edge', 'HKLM:\SOFTWARE\Policies\CocCoc\Browser') {
+        if (Set-RegList "$b\URLBlocklist" $ds) { $changed = $true }
+    }
+    $ff = @($ds | ForEach-Object { "*://$_/*"; "*://*.$_/*" })
+    if (Set-RegList 'HKLM:\SOFTWARE\Policies\Mozilla\Firefox\WebsiteFilter\Block' $ff) { $changed = $true }
+    if ($changed) { Write-Log "Đã cập nhật danh sách chặn trong trình duyệt: $($ds.Count) trang" }
 }
 
 function Set-SafeDns([bool]$on) {
@@ -306,6 +335,7 @@ if ($Cleanup) {
     foreach ($step in @(
             { Set-Internet $true },
             { Set-BlockedSites @() },
+            { Set-BrowserBlocklist @() },
             { Set-SafeDns $false },
             { Set-AntiBypassPolicies $false },
             {
@@ -352,8 +382,10 @@ while ($true) {
         $sites = @($script:Config.blockedSites | Where-Object { $_ }); $safe = [bool]$script:Config.safeDns
         if ($null -ne $script:Config.antiBypass) { $anti = [bool]$script:Config.antiBypass }
     }
-    if ($anti) { $sites = @($sites) + $BypassHosts | Select-Object -Unique }
+    $browserSites = @($sites)
+    if ($anti) { $sites = @($sites) + $BypassHosts | Select-Object -Unique; $browserSites = @($browserSites) + $BypassHosts | Select-Object -Unique }
     try { Set-BlockedSites $sites } catch { Write-Log "Lỗi cập nhật hosts: $($_.Exception.Message)" }
+    try { Set-BrowserBlocklist $browserSites } catch { Write-Log "Lỗi chặn web trong trình duyệt: $($_.Exception.Message)" }
     try { Set-AntiBypassPolicies $anti } catch { Write-Log "Lỗi chính sách trình duyệt: $($_.Exception.Message)" }
     if ($anti) { try { Stop-BypassApps } catch { Write-Log "Lỗi chặn phần mềm lách: $($_.Exception.Message)" } }
     try { Set-SafeDns $safe } catch { Write-Log "Lỗi DNS: $($_.Exception.Message)" }

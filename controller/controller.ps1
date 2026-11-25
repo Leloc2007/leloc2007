@@ -11,7 +11,7 @@ param(
     [string]$UpdateUrl = 'https://raw.githubusercontent.com/Leloc2007/leloc2007/kidguard'
 )
 $ErrorActionPreference = 'Stop'
-$Version = '1.2'
+$Version = '1.2.1'
 if (-not $DataDir) { $DataDir = Join-Path $PSScriptRoot 'data' }
 $StateFile = Join-Path $DataDir 'state.json'
 $LogFile = Join-Path $DataDir 'controller.log'
